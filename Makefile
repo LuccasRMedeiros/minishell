@@ -1,14 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#              #
-#    Updated: 2022/01/24 16:12:51 by lrocigno         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+## ########################################################################## ##
+##                                                                            ##
+##                                                        :::      ::::::::   ##
+##   Makefile                                           :+:      :+:    :+:   ##
+##                                                    +:+ +:+         +:+     ##
+##   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        ##
+##                                                +#+#+#+#+#+   +#+           ##
+##   Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#             ##
+##   Updated: 2022/01/25 09:28:29 by vgoncalv         ###   ########.fr       ##
+##                                                                            ##
+## ########################################################################## ##
 
 NAME = minishell
 
@@ -41,44 +41,46 @@ endef
 export MINISHELL
 
 CC = clang
-
-FLAGS = -Wall -Werror -Wextra -g
-
+CFLAGS = -Wall -Werror -Wextra -g
 SANITIZERS = 
 
-DEPS =	-lreadline \
-		-L ./libs/libft/ -lft \
+LIB_PATH = ./lib
+LIBFT_PATH = $(LIB_PATH)/libft
+LIBFT = $(LIBFT_PATH)/libft.a
+LIBFT_FLAGS = -L./lib/libft -lft
+
+LIBS = $(LIBFT_FLAGS) -lreadline
 		
-INCLUDES = -I ./libs/libft/ \
-		   -I ./includes/ \
+INCLUDES = -I ./lib/libft/includes \
+		   -I ./src
 
-BASE =
+vpath %.c src
+SRC :=
 
-SRC =
+OBJ_PATH = ./build
+OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))
 
-OBJ = $(SRC:%.c=%.o)
+all: $(NAME)
 
-SRC_FULL =	$(addprefix ./src/, $(BASE)) \
-
-all: makelibft $(NAME)
+$(NAME): $(LIBFT) $(OBJ)
 	echo $(RED) "$$MINISHELL"
+	mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) $(SANITIZERS) $(INCLUDES) $(OBJ) src/$(NAME).c $(LIBS) -o $@
 
-$(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(SANITIZERS) $(INCLUDES) minishell.c -o $(NAME) $(OBJ) $(DEPS)
-
-$(OBJ): $(SRC_FULL)
-	$(CC) $(FLAGS) $(SANITIZERS) $(INCLUDES) -c $(SRC_FULL)
+$(OBJ_PATH)/%.o: %.c
+	$(CC) $(CFLAGS) $(SANITIZERS) $(INCLUDES) $< -c -o $@
 
 clean:
-	make -C ./libs/libft clean
+	make -C $(LIBFT_PATH) clean
+	rm -rf $(OBJ_PATH)
 
 fclean: clean
-	make -C ./libs/libft fclean
+	make -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
 
 re: fclean all
 
-makelibft:
-	make -C ./libs/libft all
+$(LIBFT):
+	make -C $(LIBFT_PATH)
 
 .PHONY: all clean fclean make re
