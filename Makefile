@@ -12,8 +12,6 @@
 
 NAME = minishell
 
-RED = $(tput setaf 255;0;0)
-
 define MINISHELL
                                                          
                                       .          
