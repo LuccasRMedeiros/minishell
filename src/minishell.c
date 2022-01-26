@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/25 19:31:22 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/01/25 19:58:23 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static void	validate_command(char *command)
 {
 	if (*command)
+	{
 		printf("minishell: %s: command not found\n", command);
+		add_history(command);
+	}
 }
 
 static char	*gen_prompt(char **envp)
