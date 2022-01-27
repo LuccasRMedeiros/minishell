@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/25 19:58:23 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/01/27 15:57:06 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,22 @@ static void	validate_command(char *command)
 	}
 }
 
-static char	*gen_prompt(char **envp)
+static char	*gen_prompt(const char *user, const char *pwd)
 {
-	size_t	i;
-	char	*user;
 	char	*prompt;
+	size_t	prompt_size;
 
-	i = 0;
-	while (ft_strncmp("USER", envp[i], 4))
-		++i;
-	user = ft_strjoin("\e[1;32m", ft_strchr(envp[i], '=') + 1);
-	prompt = ft_strjoin(user, "@minishell\e[0m:\e[0;34m~\e[0m$: ");
-	free(user);
-	user = NULL;
+	prompt_size = PROMPT_SIZE + ft_strlen(user) + ft_strlen(pwd);
+	prompt = ft_calloc(prompt_size, sizeof (char *));
+	ft_strlcpy(prompt, "\e[1;32m", prompt_size);
+	ft_strlcat(prompt, user, prompt_size);
+	ft_strlcat(prompt, "@minishell\e[0m:\e[0;34m", prompt_size);
+	ft_strlcat(prompt, pwd, prompt_size);
+	ft_strlcat(prompt, "\e[0m$ ", prompt_size);
 	return (prompt);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
 	char	*prompt;
 	char	*input;
@@ -47,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 		printf("minishell: %s: No such file or directory\n", argv[1]);
 		exit(127);
 	}
-	prompt = gen_prompt(envp);
+	prompt = gen_prompt(getenv("USERNAME"), getenv("PWD"));
 	input = readline(prompt);
 	while (ft_strncmp("exit", input, ft_strlen(input)) || !*input)
 	{

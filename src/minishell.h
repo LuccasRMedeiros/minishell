@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/19 15:26:58 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/01/27 15:56:54 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <term.h>
+
+# define PROMPT_SIZE 36
 
 #endif
