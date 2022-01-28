@@ -59,10 +59,4 @@ void	free_sh(t_shell *sh);
  */
 void	error(t_shell *sh);
 
-/**
- * Parses the environment variables
- * @param sh: the shell
- */
-void	parse_env(t_shell *sh);
-
 #endif
