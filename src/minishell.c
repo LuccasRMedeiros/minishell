@@ -18,5 +18,6 @@ int	main(void)
 
 	ft_bzero(&sh, sizeof(t_shell));
 	init(&sh);
+	free_sh(&sh);
 	return (EXIT_SUCCESS);
 }
