@@ -14,7 +14,7 @@
 
 extern char	**environ;
 
-char	*prompt(void)
+char	*prompt(t_shell *sh)
 {
 	size_t	i;
 	char	*user;
@@ -26,7 +26,7 @@ char	*prompt(void)
 		++i;
 	user = ft_strchr(environ[i], '=') + 1;
 	if (ft_asprintf(&prompt, "\e[0;38;5;229m%s@minishell\e[0;0;0m$ ", user) == -1)
-		exit(EXIT_FAILURE);
+		error(sh);
 	input = readline(prompt);
 	free(prompt);
 	return (input);

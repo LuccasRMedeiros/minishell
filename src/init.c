@@ -17,14 +17,13 @@ void	init(t_shell *sh)
 {
 	char	*input;
 
-	input = prompt();
+	input = prompt(sh);
 	while (ft_strncmp("exit", input, ft_strlen(input)))
 	{
 		if (input != NULL)
 			free(input);
-		input = prompt();
+		input = prompt(sh);
 	}
 	if (input != NULL)
 		free(input);
-	(void)sh;
 }
