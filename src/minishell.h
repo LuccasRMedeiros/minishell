@@ -6,7 +6,7 @@
 /*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/27 21:54:59 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:55:00 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,5 @@ void	free_sh(t_shell *sh);
  * @param sh: the shell
  */
 void	error(t_shell *sh);
-
-# define PROMPT_SIZE 36
 
 #endif
