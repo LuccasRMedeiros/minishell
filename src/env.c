@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:33:11 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/28 16:01:08 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/28 16:13:56 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*value(const char *env)
 
 	start = ft_strchr(env, '=');
 	if (start == NULL)
-		return (NULL);
+		return (ft_strdup(""));
 	return (ft_strdup(start + 1));
 }
 
