@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
+/*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/27 21:08:32 by vgoncalv         ###   ########.fr       */
+/*   Created: 2022/01/27 20:12:16 by vgoncalv          #+#    #+#             */
+/*   Updated: 2022/01/27 21:18:18 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <readline/history.h>
 
-int	main(void)
+void	init(t_shell *sh)
 {
-	t_shell	sh;
+	char	*input;
 
-	ft_bzero(&sh, sizeof(t_shell));
-	init(&sh);
-	return (EXIT_SUCCESS);
+	input = prompt();
+	while (ft_strncmp("exit", input, ft_strlen(input)))
+	{
+		if (input != NULL)
+			free(input);
+		input = prompt();
+	}
+	if (input != NULL)
+		free(input);
+	(void)sh;
 }

@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
+/*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/27 21:08:32 by vgoncalv         ###   ########.fr       */
+/*   Created: 2022/01/27 20:21:21 by vgoncalv          #+#    #+#             */
+/*   Updated: 2022/01/27 20:22:42 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	main(void)
+void	free_sh(t_shell *sh)
 {
-	t_shell	sh;
-
-	ft_bzero(&sh, sizeof(t_shell));
-	init(&sh);
-	return (EXIT_SUCCESS);
+	ft_bzero(sh, sizeof(t_shell));
 }

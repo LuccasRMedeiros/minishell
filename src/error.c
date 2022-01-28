@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
+/*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/27 21:08:32 by vgoncalv         ###   ########.fr       */
+/*   Created: 2022/01/27 21:19:09 by vgoncalv          #+#    #+#             */
+/*   Updated: 2022/01/27 21:19:09 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	main(void)
+void	error(t_shell *sh)
 {
-	t_shell	sh;
-
-	ft_bzero(&sh, sizeof(t_shell));
-	init(&sh);
-	return (EXIT_SUCCESS);
+	free_sh(sh);
+	exit(EXIT_FAILURE);
 }
