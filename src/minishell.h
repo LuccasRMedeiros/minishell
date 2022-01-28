@@ -46,4 +46,6 @@ void	init(t_shell *sh);
  */
 void	free_sh(t_shell *sh);
 
+# define PROMPT_SIZE 36
+
 #endif
