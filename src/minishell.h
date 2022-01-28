@@ -3,35 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/27 15:56:54 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:55:00 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** Contains all the definitions of macros, enums, unions, structures and types
-** (and also its initializers and destroyers). The commom depedencies are
-** included here.
-*/
+/**
+ * Contains all the definitions of macros, enums, unions, structures and types
+ * (and also its initializers and destroyers). The commom depedencies are
+ * included here.
+ */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <curses.h>
 # include <libft.h>
-# include <signal.h>
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <string.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <dirent.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <term.h>
 
-# define PROMPT_SIZE 36
+typedef struct s_shell
+{
+}	t_shell;
+
+/**
+ * Generates the shell prompt
+ * @return the generated prompt
+ */
+char	*prompt(t_shell *sh);
+
+/**
+ * Initializes the shell
+ * @param sh: the shell
+ */
+void	init(t_shell *sh);
+
+/**
+ * Finilizes the shell
+ * @param sh: the shell
+ */
+void	free_sh(t_shell *sh);
+
+/**
+ * Finilizes the shell and exits with EXIT_FAILURE
+ * @param sh: the shell
+ */
+void	error(t_shell *sh);
 
 #endif

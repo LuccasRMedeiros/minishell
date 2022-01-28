@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/27 21:08:32 by vgoncalv         ###   ########.fr       */
+/*   Created: 2022/01/27 19:47:25 by vini              #+#    #+#             */
+/*   Updated: 2022/01/27 21:15:14 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	main(void)
-{
-	t_shell	sh;
+extern char	**environ;
 
-	ft_bzero(&sh, sizeof(t_shell));
-	init(&sh);
-	free_sh(&sh);
-	return (EXIT_SUCCESS);
+char	*prompt(t_shell *sh)
+{
+	size_t	i;
+	char	*user;
+	char	*prompt;
+	char	*input;
+
+	i = 0;
+	while (ft_strncmp("USER", environ[i], 4))
+		++i;
+	user = ft_strchr(environ[i], '=') + 1;
+	if (ft_asprintf(&prompt, "\e[0;38;5;229m%s@minishell\e[0;0;0m$ ", user) == -1)
+		error(sh);
+	input = readline(prompt);
+	free(prompt);
+	return (input);
 }

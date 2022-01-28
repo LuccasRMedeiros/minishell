@@ -1,14 +1,14 @@
-## ########################################################################## ##
-##                                                                            ##
-##                                                        :::      ::::::::   ##
-##   Makefile                                           :+:      :+:    :+:   ##
-##                                                    +:+ +:+         +:+     ##
-##   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        ##
-##                                                +#+#+#+#+#+   +#+           ##
-##   Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#             ##
-##   Updated: 2022/01/25 09:28:29 by vgoncalv         ###   ########.fr       ##
-##                                                                            ##
-## ########################################################################## ##
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vini <vini@42sp.org.br>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#              #
+#    Updated: 2022/01/27 19:51:49 by vini             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = minishell
 
@@ -39,8 +39,8 @@ endef
 export MINISHELL
 
 CC = clang
-CFLAGS = -Wall -Werror -Wextra -g
-SANITIZERS = 
+CFLAGS = -Wall -Werror -Wextra
+SANITIZERS = -g3
 
 LIB_PATH = ./lib
 LIBFT_PATH = $(LIB_PATH)/libft
@@ -53,7 +53,7 @@ INCLUDES = -I ./lib/libft/includes \
 		   -I ./src
 
 vpath %.c src
-SRC :=
+SRC := prompt.c init.c free.c error.c
 
 OBJ_PATH = ./build
 OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))
