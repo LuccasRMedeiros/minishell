@@ -6,7 +6,7 @@
 /*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/28 16:04:58 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/28 23:28:58 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 
 	ft_bzero(&sh, sizeof(t_shell));
 	parse_env(&sh);
-	init(&sh);
+	interface(NULL, &sh);
 	free_sh(&sh);
 	return (EXIT_SUCCESS);
 }

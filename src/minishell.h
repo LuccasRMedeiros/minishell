@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/28 21:26:11 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/28 23:28:58 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*prompt(t_shell *sh);
  * Initializes the shell
  * @param sh: the shell
  */
-void	init(t_shell *sh);
+void	interface(char *input, t_shell *sh);
 
 /**
  * Finilizes the shell

@@ -6,7 +6,7 @@
 #    By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#              #
-#    Updated: 2022/01/28 21:30:56 by vgoncalv         ###   ########.fr        #
+#    Updated: 2022/01/28 23:50:30 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ INCLUDES = -I ./lib/libft/includes \
 		   -I ./src
 
 vpath %.c src src/env
-SRC := prompt.c init.c free.c error.c parse.c get_env.c
+SRC := prompt.c interface.c free.c error.c parse.c get_env.c
 
 OBJ_PATH = ./build
 OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))

@@ -6,24 +6,30 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 20:12:16 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/28 22:11:26 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/01/28 23:45:21 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <readline/history.h>
 
-void	init(t_shell *sh)
+static void	validate_input(char **input)
 {
-	char	*input;
-
-	input = prompt(sh);
-	while (ft_strncmp("exit", input, ft_strlen(input)) || input == NULL)
+	if (**input)
 	{
-		if (input != NULL)
-			free(input);
-		input = prompt(sh);
+		add_history(*input);
+		safe_free((void **)&(*input));
 	}
-	if (input != NULL)
-		free(input);
+}
+
+void	interface(char *input, t_shell *sh)
+{
+	input = prompt(sh);
+	if (!ft_strncmp("exit", input, ft_strlen(input)) && *input)
+	{
+		safe_free((void **)&input);
+		exit(0);
+	}
+	validate_input(&input);
+	interface(input, sh);
 }
