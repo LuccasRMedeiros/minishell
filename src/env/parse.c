@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:33:11 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/28 16:23:52 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/28 21:15:18 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,24 @@ static char	*value(const char *env)
 
 void	parse_env(t_shell *sh)
 {
+	t_env	*env;
 	size_t	i;
-	size_t	size;
 
-	size = 0;
-	while (environ[size] != NULL)
-		size++;
-	sh->env = ft_calloc(size + 1, sizeof(t_env *));
+	sh->env = ft_calloc(1, sizeof(t_env));
+	env = sh->env;
 	i = 0;
-	while (i < size)
+	while (environ[i] != NULL)
 	{
-		sh->env[i] = ft_calloc(1, sizeof(t_env));
-		if (sh->env[i] == NULL)
+		env->name = name(environ[i]);
+		if (env->name == NULL)
 			error(sh);
-		sh->env[i]->name = name(environ[i]);
-		sh->env[i]->value = value(environ[i]);
+		env->value = value(environ[i]);
+		if (env->value == NULL)
+			error(sh);
+		env->next = ft_calloc(1, sizeof(t_env));
+		env = env->next;
+		if (env == NULL)
+			error(sh);
 		i++;
 	}
 }

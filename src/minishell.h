@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
+/*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/28 15:59:36 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/28 21:26:11 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,21 @@
 # define MINISHELL_H
 
 # include <libft.h>
+# include <ft_printf.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
 typedef struct s_env
 {
-	const char	*name;
-	char		*value;
+	const char		*name;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 typedef struct s_shell
 {
-	t_env	**env;
+	t_env	*env;
 }	t_shell;
 
 /**
