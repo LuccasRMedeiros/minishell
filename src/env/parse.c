@@ -6,13 +6,20 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:33:11 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/28 21:15:18 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/29 23:46:35 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 extern char	**environ;
+
+static t_env	*clone_env(t_env *env, const char *name)
+{
+	while (ft_strncmp(name, env->name, ft_strlen(name)))
+		env = env->next;
+	return (env);
+}
 
 static char	*name(const char *env)
 {
@@ -33,12 +40,12 @@ static char	*value(const char *env)
 
 void	parse_env(t_shell *sh)
 {
-	t_env	*env;
 	size_t	i;
+	t_env	*env;
 
 	sh->env = ft_calloc(1, sizeof(t_env));
-	env = sh->env;
 	i = 0;
+	env = sh->env;
 	while (environ[i] != NULL)
 	{
 		env->name = name(environ[i]);
@@ -53,4 +60,6 @@ void	parse_env(t_shell *sh)
 			error(sh);
 		i++;
 	}
+	sh->user = clone_env(sh->env, "USER");
+	sh->pwd = clone_env(sh->env, "PWD");
 }
