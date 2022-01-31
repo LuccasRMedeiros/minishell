@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/29 23:01:14 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/01/31 09:37:17 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <libft.h>
 # include <ft_printf.h>
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 
 /**
  * Carries the environment variables separatelly
@@ -42,16 +40,10 @@ typedef struct s_shell
 {
 	t_env	*env;
 	t_env	*user;
+	t_env	*home;
 	t_env	*pwd;
 	t_env	*old_pwd;
 }	t_shell;
-
-/**
- * Generates the shell prompt
- * @return the generated prompt
- */
-
-char	*prompt(t_shell *sh);
 
 /**
  * Initializes the shell

@@ -21,6 +21,7 @@ int	main(void)
 	ft_bzero(&sh, sizeof(t_shell));
 	parse_env(&sh);
 	sh.user = get_env("USER", &sh);
+	sh.home = get_env("HOME", &sh);
 	sh.pwd = get_env("PWD", &sh);
 	sh.old_pwd = sh.pwd;
 	interface(NULL, &sh);

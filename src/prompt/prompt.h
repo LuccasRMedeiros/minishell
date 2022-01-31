@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 09:29:56 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 09:33:43 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/31 09:59:55 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PROMPT_H
 
 # include <minishell.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 /**
  * Terminal Emulator ANSI Escape Colors
@@ -45,5 +47,18 @@
 # define BOLD_PURPLE "\001\033[1;35m\002"
 # define BOLD_CYAN "\001\033[1;36m\002"
 # define BOLD_WHITE "\001\033[1;37m\002"
+
+/**
+ * Gets the PWD. If it is is a folder inside the user HOME, represent it with
+ * ~/ (see: tilde-expansion)
+ * @return the formated pwd
+ */
+char	*get_pwd(t_shell *sh);
+
+/**
+ * Generates the shell prompt
+ * @return the generated prompt
+ */
+char	*prompt(t_shell *sh);
 
 #endif
