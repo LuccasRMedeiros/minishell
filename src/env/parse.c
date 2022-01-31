@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:33:11 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 09:19:41 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/31 10:18:35 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	parse_env(t_shell *sh)
 		env->value = value(environ[i]);
 		if (env->value == NULL)
 			error(sh);
+		if (environ[i + 1] == NULL)
+			break ;
 		env->next = ft_calloc(1, sizeof(t_env));
 		env = env->next;
 		if (env == NULL)
