@@ -21,6 +21,7 @@ int	main(void)
 	parse_env(&sh);
 	sh.user = get_env("USER", &sh);
 	sh.pwd = get_env("PWD", &sh);
+	sh.old_pwd = sh.pwd;
 	interface(NULL, &sh);
 	free_sh(&sh);
 	return (EXIT_SUCCESS);

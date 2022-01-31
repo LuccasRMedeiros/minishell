@@ -60,7 +60,6 @@
 /**
  * Carries the environment variables separatelly
  */
-
 typedef struct s_env
 {
 	const char		*name;
@@ -71,12 +70,12 @@ typedef struct s_env
 /**
  * Carries general information of the shell
  */
-
 typedef struct s_shell
 {
 	t_env	*env;
 	t_env	*user;
 	t_env	*pwd;
+	t_env	*old_pwd;
 }	t_shell;
 
 /**
