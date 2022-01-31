@@ -6,10 +6,11 @@
 /*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/31 09:25:24 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/31 10:26:45 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <minishell.h>
 #include <env/env.h>
 

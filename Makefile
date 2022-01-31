@@ -52,8 +52,8 @@ LIBS = $(LIBFT_FLAGS) -lreadline
 INCLUDES = -I ./lib/libft/includes \
 		   -I ./src
 
-vpath %.c src src/env
-SRC := prompt.c interface.c free.c error.c parse.c get_env.c
+vpath %.c src src/env src/prompt
+SRC := minishell.c pwd.c prompt.c interface.c free.c error.c parse.c get_env.c
 
 OBJ_PATH = ./build
 OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))
@@ -62,7 +62,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	echo "$$MINISHELL"
-	$(CC) $(CFLAGS) $(SANITIZERS) $(INCLUDES) $(OBJ) src/$(NAME).c $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(SANITIZERS) $(INCLUDES) $(OBJ) $(LIBS) -o $@
 
 $(OBJ_PATH)/%.o: %.c
 	mkdir -p $(OBJ_PATH)

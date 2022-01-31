@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:24:10 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/28 21:23:25 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/31 10:27:49 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 t_env	*get_env(const char *name, t_shell *sh)
 {
-	while (sh->env != NULL)
+	t_env	*env;
+
+	env = sh->env;
+	while (env != NULL)
 	{
-		if (ft_strcmp(name, sh->env->name) == 0)
-			return (sh->env);
-		sh->env = sh->env->next;
+		if (ft_strncmp(name, env->name, ft_strlen(name)) == 0)
+			return (env);
+		env = env->next;
 	}
 	return (NULL);
 }
