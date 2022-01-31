@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:24:48 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/28 16:28:47 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/31 10:54:09 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_env	*get_env(const char *name, t_shell *sh);
  * @param name: the name of the environment variable
  * @param value: the value of the environment variable
  * @param sh: the shell
+ * @return the environment variable set, or NULL if there was an error
  */
-void	set_env(const char *name, char *value, t_shell *sh);
+t_env	*set_env(const char *name, char *value, t_shell *sh);
 
 #endif
