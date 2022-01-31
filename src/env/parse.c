@@ -6,11 +6,12 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:33:11 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 10:18:35 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/31 11:07:19 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <env/env.h>
 
 extern char	**environ;
 
@@ -29,6 +30,29 @@ static char	*value(const char *env)
 	if (start == NULL)
 		return (ft_strdup(""));
 	return (ft_strdup(start + 1));
+}
+
+static void	set_default_envs(t_shell *sh)
+{
+	sh->user = get_env("USER", sh);
+	if (sh->user == NULL)
+	{
+		sh->user = set_env("USER", "user", sh);
+		if (sh->user == NULL)
+			error(sh);
+	}
+	sh->host = get_env("HOST", sh);
+	if (sh->host == NULL)
+	{
+		sh->host = set_env("HOST", "minishell", sh);
+		if (sh->host == NULL)
+			error(sh);
+	}
+	sh->home = get_env("HOME", sh);
+	sh->pwd = get_env("PWD", sh);
+	if (sh->pwd == NULL)
+		error(sh);
+	sh->old_pwd = sh->pwd;
 }
 
 void	parse_env(t_shell *sh)
@@ -55,4 +79,5 @@ void	parse_env(t_shell *sh)
 			error(sh);
 		i++;
 	}
+	set_default_envs(sh);
 }
