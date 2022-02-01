@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 20:12:16 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 14:26:21 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:55:45 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static char	validate(char *input)
 {
-	if (input == NULL)
+	if (input == NULL || ft_strlen(input) == 0)
 		return (0);
 	if (ft_strncmp("exit", input, ft_strlen(input)) == 0)
 		return (1);
