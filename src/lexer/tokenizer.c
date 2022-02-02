@@ -6,25 +6,11 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 01:24:11 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:49:19 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
-
-void	discard_tokens(t_token **tokens)
-{
-	size_t	i;
-
-	i = 0;
-	while (tokens[i]->type != INVALID)
-	{
-		del_token(tokens[i]);
-		++i;
-	}
-	del_token(tokens[i]);
-	safe_free((void **)&tokens); // O compilador está dizendo que a declaração é inválida.
-}
 
 /**
  * Count the amount of tokens to create a array of them.
@@ -71,10 +57,29 @@ t_token	**tokenizer(char *input)
 	while (i < n_tokens)
 	{
 		type = get_type(i, input);
-		value = get_value(type, input);
+		if (type != INVALID && type != COMMENT)
+			value = get_value(type, input);
+		else
+			value = NULL;
 		tokens[i] = new_token(type, value);
+		input += ft_strlen(value);
 		++i;
 	}
 	tokens[i] = new_token(INVALID, NULL);
 	return (tokens);
+}
+
+void	discard_tokens(t_token **tokens)
+{
+	size_t	i;
+
+	i = 0;
+	while (tokens[i]->type != INVALID)
+	{
+		del_token(tokens[i]);
+		++i;
+	}
+	del_token(tokens[i]);
+	free(tokens);
+	tokens = NULL;
 }

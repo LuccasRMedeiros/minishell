@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 01:16:30 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:06:46 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # include <ft_printf.h>
 # include <stdio.h>
+# include <lexer/lexer.h>
 
 /**
  * Hold the environment variables separatelly
@@ -54,13 +55,6 @@ typedef struct s_shell
  */
 
 void	interface(char *input, t_shell *sh);
-
-/**
- * Tokenize the input.
- * @param input: a string received from the user
- */
-
-void	tokenizer(char *input);
 
 /**
  * Finalizes the shell

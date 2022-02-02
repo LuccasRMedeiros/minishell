@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 01:16:31 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/02 13:25:17 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,20 @@ typedef struct s_token
 }    t_token;
 
 /**
+ * Get the defined quote.
+ * @param:
+ */
+
+char	get_quote(void);
+
+/**
+ * Set the quote.
+ * @param q: the quote character
+ */
+
+void	set_quote(char q);
+
+/**
  * t_token constructor
  * @param type: which type this token is, value: the value for the token
  */
@@ -51,14 +65,7 @@ void	del_token(t_token *del);
  * @param c: the character being verified.
  */
 
-int	lex_isspace(char c);
-
-/**
- * Return if the word is a built-in command
- * @param input: the user input.
- */
-
-int	lex_isbuiltin(char *input);
+int		lex_isspace(char c);
 
 /**
  * Extract the value using the type as reference
