@@ -6,7 +6,7 @@
 #    By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#              #
-#    Updated: 2022/01/28 23:50:30 by lrocigno         ###   ########.fr        #
+#    Updated: 2022/02/02 01:12:26 by lrocigno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,9 +52,10 @@ LIBS = $(LIBFT_FLAGS) -lreadline
 INCLUDES = -I ./lib/libft/includes \
 		   -I ./src
 
-vpath %.c src src/env src/prompt
+vpath %.c src src/env src/prompt src/lexer
 SRC := minishell.c get_pwd.c prompt.c interface.c free.c \
-	   error.c parse.c get_env.c set_env.c
+	   error.c parse.c get_env.c set_env.c \
+	   get_type.c get_value.c helpers.c tokenizer.c token_new_del.c \
 
 OBJ_PATH = ./build
 OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))
