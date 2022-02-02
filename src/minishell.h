@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/01/31 10:48:40 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/02 01:16:30 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <libft.h>
 # include <ft_printf.h>
 # include <stdio.h>
 
 /**
- * Carries the environment variables separatelly
+ * Hold the environment variables separatelly
  */
+
 typedef struct s_env
 {
 	const char		*name;
@@ -34,8 +34,9 @@ typedef struct s_env
 }	t_env;
 
 /**
- * Carries general information of the shell
+ * Hold general information of the shell
  */
+
 typedef struct s_shell
 {
 	t_env	*env;
@@ -47,14 +48,22 @@ typedef struct s_shell
 }	t_shell;
 
 /**
- * Initializes the shell
- * @param sh: the shell
+ * Receive the user input, parse, execute (if it is a valid command) and stores
+ * in the history (when it isn't a empty line).
+ * @param input: empty string, sh: the shell
  */
 
 void	interface(char *input, t_shell *sh);
 
 /**
- * Finilizes the shell
+ * Tokenize the input.
+ * @param input: a string received from the user
+ */
+
+void	tokenizer(char *input);
+
+/**
+ * Finalizes the shell
  * @param sh: the shell
  */
 
