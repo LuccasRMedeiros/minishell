@@ -57,7 +57,7 @@ t_token	**tokenizer(char *input)
 	while (i < n_tokens)
 	{
 		type = get_type(i, input);
-		if (type != INVALID && type != COMMENT)
+		if (type != INVALID)
 			value = get_value(type, input);
 		else
 			value = NULL;

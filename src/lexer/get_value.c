@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:52:29 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 14:34:24 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:34:31 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 static int	isstop(char inchar, char stop)
 {
+	if (inchar == '#')
+		return (1);
 	if (stop == '\0')
 		return (lex_isspace(inchar) == 1 || inchar == stop);
 	else
@@ -40,9 +42,11 @@ static size_t	vallen(t_type type, char *input)
 
 	len = 0;
 	if (type == STRING_LITERAL)
-		stop = get_quote();
+		stop = quote('g');
 	else
 		stop = '\0';
+	while (*input == quote('g'))
+		++input;
 	while (isstop(*input, stop) == 0)
 	{
 		if (ft_isalnum(*input) || type == STRING_LITERAL)
@@ -62,19 +66,19 @@ char	*get_value(t_type type, char *input)
 		++input;
 	len = vallen(type, input);
 	i = 0;
-	ret = ft_calloc(len, sizeof (*ret));
+	ret = ft_calloc(len + 1, sizeof (*ret));
 	if (!ret)
 		return (NULL);
 	while (i < len)
 	{
 		if (ft_isalnum(*input)
-			|| (type == STRING_LITERAL && *input != get_quote()))
+			|| (type == STRING_LITERAL && *input != quote('g')))
 		{
 			ret[i] = *input;
 			++i;
 		}
 		++input;
 	}
-	ret[i] = '\0';
+	quote('d');
 	return (ret);
 }

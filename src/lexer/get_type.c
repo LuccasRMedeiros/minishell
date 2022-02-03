@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:28:34 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 13:25:17 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:34:31 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ static int	isstrlit(char *input)
 
 	presume = 0;
 	if (*input == '\"' || *input == '\'')
-		set_quote(*input);
+		quote(*input);
 	else
 		return (presume);
-	while (*input != '\0' && *input != get_quote())
+	while (*input == quote('g'))
+		++input;
+	while (*input != '\0' && *input != quote('g'))
 	{
 		if (lex_isspace(*input))
 			presume = 1;
@@ -73,13 +75,11 @@ t_type	get_type(size_t i, char *input)
 		++input;
 	if (isbuiltin(input))
 		return (BUILTIN);
+	else if (ft_isalnum(*input) && i == 0)
+		return (COMMAND);
 	else if (ft_isdigit(*input))
 		return (INT_LITERAL);
-	else if (ft_isalpha(*input) && i == 0)
-		return (COMMAND);
 	else if (*input == '-' || ft_isalpha(*input))
 		return (PARAMETER);
-	else if (*input == '#')
-		return (COMMENT);
 	return (INVALID);
 }

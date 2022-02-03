@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 13:25:17 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:34:31 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef enum e_type
     PARAMETER,
     STRING_LITERAL,
     INT_LITERAL,
-	COMMENT,
 }    t_type;
 
 typedef struct s_token
@@ -33,18 +32,11 @@ typedef struct s_token
 }    t_token;
 
 /**
- * Get the defined quote.
- * @param:
+ * Set or get a quote, to set use SET_QUOTE macro, to get use GET_QUOTE instead.
+ * @param flag: one of the macros mentioned.
  */
 
-char	get_quote(void);
-
-/**
- * Set the quote.
- * @param q: the quote character
- */
-
-void	set_quote(char q);
+char	quote(char flag);
 
 /**
  * t_token constructor
