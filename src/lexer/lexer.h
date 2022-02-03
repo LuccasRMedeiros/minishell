@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 20:34:31 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/03 07:13:08 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 typedef enum e_type
 {
 	INVALID = -1,
-    BUILTIN,
+	BUILTIN,
 	COMMAND,
-    PARAMETER,
-    STRING_LITERAL,
-    INT_LITERAL,
-}    t_type;
+	PARAMETER,
+	STRING_LITERAL,
+	INT_LITERAL,
+}	t_type;
 
 typedef struct s_token
 {
-    t_type        type;
-    const char    *value;
-}    t_token;
+	t_type		type;
+	const char	*value;
+}	t_token;
 
 /**
  * Set or get a quote, to set use SET_QUOTE macro, to get use GET_QUOTE instead.
