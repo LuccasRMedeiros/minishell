@@ -51,9 +51,9 @@ t_token	**tokenizer(char *input)
 	char	*value;
 	t_token	**tokens;
 
-	n_tokens = cnt_tokens(input);
 	i = 0;
-	tokens = ft_calloc(n_tokens + 1, sizeof (*tokens));
+	n_tokens = cnt_tokens(input);
+	tokens = ft_calloc(n_tokens + 1, sizeof (t_token *));
 	while (i < n_tokens)
 	{
 		type = get_type(i, input);
