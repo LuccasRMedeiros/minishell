@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 14:49:19 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/03 07:16:44 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_token	**tokenizer(char *input)
 		input += ft_strlen(value);
 		++i;
 	}
-	tokens[i] = new_token(INVALID, NULL);
+	tokens[i] = NULL;
 	return (tokens);
 }
 
@@ -74,7 +74,7 @@ void	discard_tokens(t_token **tokens)
 	size_t	i;
 
 	i = 0;
-	while (tokens[i]->type != INVALID)
+	while (tokens != NULL)
 	{
 		del_token(tokens[i]);
 		++i;
