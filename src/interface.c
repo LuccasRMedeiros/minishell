@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 20:12:16 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/02 15:06:12 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/05 16:37:52 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	validate(char *input)
 
 void	interface(char *input, t_shell *sh)
 {
-	t_token	**tokens;
+	t_token	*tokens;
 
 	input = prompt(sh);
 	if (validate(input))
@@ -35,7 +35,7 @@ void	interface(char *input, t_shell *sh)
 		exit(EXIT_SUCCESS);
 	}
 	tokens = tokenizer(input);
-	discard_tokens(tokens);
+	clear_token_list(tokens);
 	safe_free((void **)&input);
 	interface(input, sh);
 }

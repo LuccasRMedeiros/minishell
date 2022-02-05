@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_new_del.c                                    :+:      :+:    :+:   */
+/*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:04:44 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 14:51:03 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/05 16:39:37 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	del_token(t_token *del)
 	value = (char *)del->value;
 	free(value);
 	value = NULL;
-	del->type = INVALID;
+	del->type = 0;
 	free(del);
 	del = NULL;
 }
@@ -33,5 +33,18 @@ t_token	*new_token(t_type type, const char *value)
 		return (NULL);
 	new->type = type;
 	new->value = value;
+	new->next = NULL;
 	return (new);
+}
+
+void	clear_token_list(t_token *del_list)
+{
+	t_token	*aux;
+
+	while (del_list != NULL)
+	{
+		aux = del_list->next;
+		del_token(del_list);
+		del_list = aux;
+	}
 }

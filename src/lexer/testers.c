@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.c                                          :+:      :+:    :+:   */
+/*   testers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 00:06:32 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/05 16:32:22 by lrocigno         ###   ########.fr       */
+/*   Created: 2022/02/05 15:27:30 by lrocigno          #+#    #+#             */
+/*   Updated: 2022/02/05 15:38:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer/helpers.h>
+#include <lexer/lexer.h>
 
-int	is_space(char c)
+int	isquote(char inchar)
 {
-	if (c == ' ' || c == '\t' || c == '\r')
-		return (1);
-	else if (c == '\n' || c == '\v' || c == '\f')
-		return (1);
-	return (0);
+	return (inchar == '\"' || inchar == '\'');
 }
 
-int	is_quote(char c)
-{
-	return (c == '\"' || c == '\'');
-}
-
-int	is_stop(char c)
+int	isstop(char inchar)
 {
 	char stop;
 
-	stop = get_quote();
+	stop = quote('g');
 	if (!stop)
 		stop = ' ';
-	return (c == '#' || c == stop || c == '\0');
+	return (inchar == '#' || inchar == stop || inchar == '\0');
 }

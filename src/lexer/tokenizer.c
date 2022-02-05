@@ -6,80 +6,63 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/03 07:16:44 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/05 16:37:52 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
+#include <lexer/helpers.h>
 
 /**
- * Count the amount of tokens to create a array of them.
+ * Predict the amount of tokens.
  */
 
-static size_t	cnt_tokens(char *input)
+static int	pred_tokens(char *input)
 {
-	size_t	cnt;
-	size_t	i;
-	int		quotes;
-	int		is_word;
+	int	cnt;
+	int	isword;
 
 	cnt = 0;
-	i = 0;
-	quotes = 0;
-	is_word = 0;
-	while (input[i] != '\0' && input[i] != '#')
+	isword = 0;
+	clear_quote();
+	while(*input != '\0')
 	{
-		if (ft_isalnum(input[i]) && !is_word)
+		if (is_quote(*input) && get_quote() == '\0')
+			set_quote(input);
+		if (isword == 0)
 		{
-			++cnt;
-			is_word = 1;
+			if (is_stop(*input) == 0)
+			{
+				++cnt;
+				isword = 1;
+			}
 		}
-		else if (lex_isspace(input[i]) && quotes % 2 == 0)
-			is_word = 0;
-		else if (input[i] == '\"' || input[i] == '\'')
-			++quotes;
-		++i;
+		else if (is_stop(*input))
+			isword = 0;
+		++input;
 	}
 	return (cnt);
 }
 
-t_token	**tokenizer(char *input)
+t_token	*tokenizer(char *input)
 {
-	size_t	n_tokens;
-	size_t	i;
 	t_type	type;
 	char	*value;
-	t_token	**tokens;
+	t_token	*tokens;
+	int		n_tks;
+	int		tk_n;
 
-	i = 0;
-	n_tokens = cnt_tokens(input);
-	tokens = ft_calloc(n_tokens + 1, sizeof (t_token *));
-	while (i < n_tokens)
+	while(is_space(*input))
+		++input;
+	n_tks = pred_tokens(input);
+	tk_n = 0;
+	while (tk_n < n_tks)
 	{
-		type = get_type(i, input);
-		if (type != INVALID)
-			value = get_value(type, input);
-		else
-			value = NULL;
-		tokens[i] = new_token(type, value);
+		value = get_value(input);
+		type = get_type(tk_n, value);
+		tokens = new_token(type, value);
 		input += ft_strlen(value);
-		++i;
+		++tk_n;
 	}
-	tokens[i] = NULL;
 	return (tokens);
-}
-
-void	discard_tokens(t_token **tokens)
-{
-	size_t	i;
-
-	i = 0;
-	while (tokens != NULL)
-	{
-		del_token(tokens[i]);
-		++i;
-	}
-	del_token(tokens[i]);
-	free(tokens);
-	tokens = NULL;
 }
