@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:28:34 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/05 16:23:12 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:30:09 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@
 
 static int	isbuiltin(char *value)
 {
-	if (ft_strlen(value) == 0)
+	size_t	v_sz = ft_strlen(value);
+	if (v_sz == 0)
 		return (0);
-	if (ft_strncmp("echo", value, 4) == 0
-		|| ft_strncmp("cd", value, 2) == 0
-		|| ft_strncmp("pwd", value, 3) == 0
-		|| ft_strncmp("export", value, 6) == 0
-		|| ft_strncmp("unset", value, 5) == 0
-		|| ft_strncmp("env", value, 3) == 0
-		|| ft_strncmp("exit", value, 4) == 0)
+	if (ft_strncmp("echo", value, v_sz) == 0
+		|| ft_strncmp("cd", value, v_sz) == 0
+		|| ft_strncmp("pwd", value, v_sz) == 0
+		|| ft_strncmp("export", value, v_sz) == 0
+		|| ft_strncmp("unset", value, v_sz) == 0
+		|| ft_strncmp("env", value, v_sz) == 0
+		|| ft_strncmp("exit", value, v_sz) == 0)
 	{
 		return (1);
 	}

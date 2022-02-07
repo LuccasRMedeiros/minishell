@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 20:12:16 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/05 16:37:52 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/06 22:11:43 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,28 @@
 
 static char	validate(char *input)
 {
+	t_token	*tokens;
+
 	if (input == NULL || ft_strlen(input) == 0)
 		return (0);
 	if (ft_strncmp("exit", input, ft_strlen(input)) == 0)
 		return (1);
+	tokens = tokenizer(input);
+	// ------ remover depois
+	t_token *test = tokens;
+	while (test != NULL)
+	{
+		printf("%s\n", test->value);
+		test = test->next;
+	}
+	// ---------------------
+	clear_token_list(tokens);
 	add_history(input);
 	return (0);
 }
 
 void	interface(char *input, t_shell *sh)
 {
-	t_token	*tokens;
-
 	input = prompt(sh);
 	if (validate(input))
 	{
@@ -34,8 +44,6 @@ void	interface(char *input, t_shell *sh)
 		free_sh(sh);
 		exit(EXIT_SUCCESS);
 	}
-	tokens = tokenizer(input);
-	clear_token_list(tokens);
 	safe_free((void **)&input);
 	interface(input, sh);
 }

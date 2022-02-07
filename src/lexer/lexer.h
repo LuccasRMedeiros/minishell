@@ -63,7 +63,7 @@ void	clear_token_list(t_token *del_list);
  * @param type: which type the token is, input: the user input
  */
 
-char	*get_value(char *input);
+char	*get_value(char **input);
 
 /**
  * Return the type of token it is verifying

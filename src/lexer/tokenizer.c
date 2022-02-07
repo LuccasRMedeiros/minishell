@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/05 16:37:52 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/06 18:43:45 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,35 @@ static int	pred_tokens(char *input)
 	return (cnt);
 }
 
-t_token	*tokenizer(char *input)
+static t_token	*generate_token(char **input, int tk_n)
 {
 	t_type	type;
 	char	*value;
-	t_token	*tokens;
+
+	value = get_value(input);
+	type = get_type(tk_n, value);
+	return (new_token(type, value));
+}
+
+t_token	*tokenizer(char *input)
+{
 	int		n_tks;
+	t_token	*head;
+	t_token	*tokens;
 	int		tk_n;
 
+	head = NULL;
 	while(is_space(*input))
 		++input;
 	n_tks = pred_tokens(input);
-	tk_n = 0;
+	head = generate_token(&input, 0);
+	tokens = head;
+	tk_n = 1;
 	while (tk_n < n_tks)
 	{
-		value = get_value(input);
-		type = get_type(tk_n, value);
-		tokens = new_token(type, value);
-		input += ft_strlen(value);
+		tokens->next = generate_token(&input, tk_n);
+		tokens = tokens->next;
 		++tk_n;
 	}
-	return (tokens);
+	return (head);
 }
