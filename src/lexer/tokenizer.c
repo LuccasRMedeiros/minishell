@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/06 18:43:45 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:43:30 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	pred_tokens(char *input)
 	{
 		if (is_quote(*input) && get_quote() == '\0')
 			set_quote(input);
-		if (isword == 0)
+		else if (isword == 0)
 		{
 			if (is_stop(*input) == 0)
 			{
@@ -43,6 +43,11 @@ static int	pred_tokens(char *input)
 	}
 	return (cnt);
 }
+
+/**
+ * Generate a token and return it. The subroutine exists to help to construct
+ * the list of tokens.
+ */
 
 static t_token	*generate_token(char **input, int tk_n)
 {

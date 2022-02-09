@@ -33,7 +33,7 @@ void	set_quote(char *input)
 	char	q;
 
 	q = '\0';
-	while (*input != '\0')
+	while (*input != q)
 	{
 		if (is_quote(*input))
 		{
