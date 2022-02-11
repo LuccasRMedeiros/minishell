@@ -41,6 +41,7 @@ static int	pred_tokens(char *input)
 			isword = 0;
 		++input;
 	}
+	clear_quote();
 	return (cnt);
 }
 
