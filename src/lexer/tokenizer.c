@@ -21,23 +21,24 @@ static int	pred_tokens(char *input)
 {
 	int	cnt;
 	int	isword;
+	int	open_q;
 
 	cnt = 0;
 	isword = 0;
-	clear_quote();
+	open_q = 0;
 	while(*input != '\0')
 	{
 		if (is_quote(*input) && get_quote() == '\0')
 			set_quote(input);
 		else if (isword == 0)
 		{
-			if (is_stop(*input) == 0)
+			if (is_stop(input, &open_q, 1) == 0)
 			{
 				++cnt;
 				isword = 1;
 			}
 		}
-		else if (is_stop(*input))
+		else if (is_stop(input, &open_q, 1))
 			isword = 0;
 		++input;
 	}
@@ -67,6 +68,7 @@ t_token	*tokenizer(char *input)
 	t_token	*tokens;
 	int		tk_n;
 
+	clear_quote(); // clear_quote é chamado de início para garantir que não haverá lixo na memória quando for preciso usar operações de aspas.
 	head = NULL;
 	while(is_space(*input))
 		++input;

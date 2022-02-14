@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:44:57 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/09 22:38:18 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/13 16:51:43 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ void	set_quote(char *input)
 	int		open_q;
 	char	q;
 
-	open_q = 0;
-	q = '\0';
-	while ((*input != ' ' || open_q == 1) && *input != '\0' && *input != '#')
+	open_q = 1;
+	q = *input;
+	while (open_q == 1 && *input != '\0')
 	{
-		if (is_quote(*input) && (q == '\0' || *input == q))
+		++input;
+		if (*input == q)
 		{
-			open_q += 1;
+			open_q = 0;
 			q = *input;
 		}
-		++input;
 	}
-	if (open_q == 2)
+	if (open_q == 0)
 		quote(q);
 }
 

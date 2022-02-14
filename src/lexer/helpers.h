@@ -13,6 +13,8 @@
 #ifndef HELPERS_H
 # define HELPERS_H
 
+# include <libft.h>
+
 /**
  * Return if c is a white space character.
  * @param c: the character being compared.
@@ -32,7 +34,7 @@ int		is_quote(char inchar);
  * @param c: the character being compared.
  */
 
-int		is_stop(char c);
+int		is_stop(char *input, int *close_q, int cq_sig);
 
 /**
  * Get the setted quote.
