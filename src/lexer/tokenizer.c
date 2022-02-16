@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/07 22:43:30 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/15 23:36:54 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,22 @@ static int	pred_tokens(char *input)
 {
 	int	cnt;
 	int	isword;
-	int	open_q;
 
 	cnt = 0;
 	isword = 0;
-	open_q = 0;
 	while(*input != '\0')
 	{
 		if (is_quote(*input) && get_quote() == '\0')
 			set_quote(input);
 		else if (isword == 0)
 		{
-			if (is_stop(input, &open_q, 1) == 0)
+			if (is_stop(input) == 0)
 			{
 				++cnt;
 				isword = 1;
 			}
 		}
-		else if (is_stop(input, &open_q, 1))
+		else if (is_stop(input))
 			isword = 0;
 		++input;
 	}
