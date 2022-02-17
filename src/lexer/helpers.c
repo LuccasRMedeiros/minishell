@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:06:32 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/16 22:47:03 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/17 20:04:58 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	is_stop(char **input)
 	nx_c = **(input + 1);
 	if (is_quote(get_quote()) && **input == get_quote())
 	{
-		*input++;
+		++(*input);
 		clear_quote();
 		if (is_space(nx_c) || nx_c == '\0' || nx_c == '#')
 			return (1);
