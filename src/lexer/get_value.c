@@ -26,7 +26,7 @@ static size_t	val_len(char **input)
 	while (is_space(**input))
 		++(*input);
 	aux = *input;
-	while (is_stop(aux) == 0)
+	while (is_stop(&aux) == 0)
 	{
 		if (is_quote(*aux) && get_quote() == '\0')
 			set_quote(aux);
@@ -50,7 +50,7 @@ char	*get_value(char **input)
 	ret = ft_calloc(len + 1, sizeof (*ret));
 	if (!ret)
 		return (NULL);
-	while (is_stop(*input) == 0)
+	while (is_stop(input) == 0)
 	{
 		if (is_quote(**input) && get_quote() == '\0')
 			set_quote(*input);

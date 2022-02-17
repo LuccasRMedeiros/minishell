@@ -34,7 +34,7 @@ int		is_quote(char inchar);
  * @param c: the character being compared.
  */
 
-int		is_stop(char *input);
+int		is_stop(char **input);
 
 /**
  * Get the setted quote.

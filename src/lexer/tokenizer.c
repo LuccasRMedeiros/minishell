@@ -36,7 +36,7 @@ static int	pred_tokens(char *input)
 				isword = 1;
 			}
 		}
-		else if (is_stop(input))
+		else if (is_stop(&input))
 			isword = 0;
 		++input;
 	}
