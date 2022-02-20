@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:28:34 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/06 19:30:09 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:47:37 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 
 static int	isbuiltin(char *value)
 {
-	size_t	v_sz = ft_strlen(value);
+	size_t	v_sz;
+
+	v_sz = ft_strlen(value);
 	if (v_sz == 0)
 		return (0);
 	if (ft_strncmp("echo", value, v_sz) == 0

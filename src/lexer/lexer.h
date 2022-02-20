@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/05 16:35:25 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/19 23:15:59 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,16 @@ typedef enum e_type
 
 typedef struct s_token
 {
-	t_type			type;
 	const char		*value;
 	struct s_token	*next;
 }	t_token;
-
-/**
- * Set or get a quote, to set use SET_QUOTE macro, to get use GET_QUOTE instead.
- * @param flag: one of the macros mentioned.
- */
-
-char	quote(char flag);
 
 /**
  * t_token constructor
  * @param type: which type this token is, value: the value for the token
  */
 
-t_token	*new_token(t_type type, const char *value);
+t_token	*new_token(const char *value);
 
 /**
  * t_token destructor
@@ -64,13 +56,6 @@ void	clear_token_list(t_token *del_list);
  */
 
 char	*get_value(char **input);
-
-/**
- * Return the type of token it is verifying
- * @param i: which token it is, input: the user input
- */
-
-t_type	get_type(size_t i, char *input);
 
 /**
  * Tokenizes the input sent by the user.

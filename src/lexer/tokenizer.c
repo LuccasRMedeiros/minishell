@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/17 20:04:05 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:48:07 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,71 +14,35 @@
 #include <lexer/helpers.h>
 
 /**
- * Predict the amount of tokens.
- */
-
-static int	pred_tokens(char *input)
-{
-	int	cnt;
-	int	isword;
-
-	cnt = 0;
-	isword = 0;
-	while(*input != '\0')
-	{
-		if (is_quote(*input) && get_quote() == '\0')
-			set_quote(input);
-		else if (isword == 0)
-		{
-			if (is_stop(&input) == 0)
-			{
-				++cnt;
-				isword = 1;
-			}
-		}
-		else if (is_stop(&input))
-			isword = 0;
-		++input;
-	}
-	clear_quote();
-	return (cnt);
-}
-
-/**
  * Generate a token and return it. The subroutine exists to help to construct
  * the list of tokens.
  */
 
-static t_token	*generate_token(char **input, int tk_n)
+static t_token	*generate_token(char **input)
 {
-	t_type	type;
 	char	*value;
 
 	value = get_value(input);
-	type = get_type(tk_n, value);
-	return (new_token(type, value));
+	if (!value)
+		return (NULL);
+	return (new_token(value));
 }
 
 t_token	*tokenizer(char *input)
 {
-	int		n_tks;
 	t_token	*head;
 	t_token	*tokens;
-	int		tk_n;
 
-	clear_quote(); // clear_quote é chamado de início para garantir que não haverá lixo na memória quando for preciso usar operações de aspas.
+	clear_quote();
 	head = NULL;
-	while(is_space(*input))
+	while (is_space(*input))
 		++input;
-	n_tks = pred_tokens(input);
-	head = generate_token(&input, 0);
+	head = generate_token(&input);
 	tokens = head;
-	tk_n = 1;
-	while (tk_n < n_tks)
+	while (tokens)
 	{
-		tokens->next = generate_token(&input, tk_n);
+		tokens->next = generate_token(&input);
 		tokens = tokens->next;
-		++tk_n;
 	}
 	return (head);
 }

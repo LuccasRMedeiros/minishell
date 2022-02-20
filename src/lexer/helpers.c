@@ -28,15 +28,18 @@ int	is_quote(char c)
 
 int	is_stop(char **input)
 {
-	char	nx_c;
-	
-	nx_c = **(input + 1);
-	if (is_quote(get_quote()) && **input == get_quote())
+	if (**input == '\0')
+		return (1);
+	if (is_quote(get_quote()))
 	{
-		++(*input);
-		clear_quote();
-		if (is_space(nx_c) || nx_c == '\0' || nx_c == '#')
-			return (1);
+		if (**input == get_quote())
+		{
+			++(*input);
+			clear_quote();
+			if (is_space(**input) || **input == '\0' || **input == '#')
+				return (1);
+		}
+		return (0);
 	}
 	else if (is_space(**input) || **input == '\0' || **input == '#')
 		return (1);

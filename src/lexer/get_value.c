@@ -6,12 +6,13 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:52:29 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/15 23:35:37 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:03:19 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
 #include <lexer/helpers.h>
+#include <stdio.h>
 
 /**
  * Calculate the total size of the token value.
@@ -19,9 +20,11 @@
 
 static size_t	val_len(char **input)
 {
-	char	*aux;
 	size_t	len;
+	char	*aux;
 
+	if (!(**input))
+		return (0);
 	len = 0;
 	while (is_space(**input))
 		++(*input);
@@ -30,7 +33,7 @@ static size_t	val_len(char **input)
 	{
 		if (is_quote(*aux) && get_quote() == '\0')
 			set_quote(aux);
-		else if (*aux != get_quote())
+		if (*aux != get_quote())
 			++len;
 		++aux;
 	}
@@ -47,19 +50,20 @@ char	*get_value(char **input)
 	len = val_len(input);
 	if (!len)
 		return (NULL);
-	ret = ft_calloc(len + 1, sizeof (*ret));
+	ret = malloc(sizeof (*ret) * (len + 1));
 	if (!ret)
 		return (NULL);
 	while (is_stop(input) == 0)
 	{
 		if (is_quote(**input) && get_quote() == '\0')
 			set_quote(*input);
-		else
+		if (**input != get_quote())
 		{
 			ret[i] = **input;
 			++i;
 		}
 		++(*input);
 	}
+	ret[i] = '\0';
 	return (ret);
 }
