@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 15:06:46 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/21 23:07:19 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,12 @@ void	free_sh(t_shell *sh);
  */
 
 void	error(t_shell *sh);
+
+/**
+ * Search for name in env variables and return its value.
+ * @param name: the env name, @param sh: the shell.
+ */
+
+char	*get_env_value(const char *name, t_shell *sh);
 
 #endif
