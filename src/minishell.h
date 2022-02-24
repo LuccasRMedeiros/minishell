@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 /**
- * Contains all the definitions of macros, enums, unions, structures and types
- * (and also its initializers and destroyers). The commom depedencies are
+ * Contains all the definitions of macros, enums, unions, structures and
+ * types (and also its initializers and destroyers). The commom depedencies are
  * included here.
  */
 
@@ -24,9 +24,8 @@
 # include <lexer/lexer.h>
 
 /**
- * Hold the environment variables separatelly
+ * @brief Hold the environment variables separatelly
  */
-
 typedef struct s_env
 {
 	const char		*name;
@@ -35,9 +34,8 @@ typedef struct s_env
 }	t_env;
 
 /**
- * Hold general information of the shell
+ * @brief Hold general information of the shell
  */
-
 typedef struct s_shell
 {
 	t_env	*env;
@@ -49,32 +47,51 @@ typedef struct s_shell
 }	t_shell;
 
 /**
- * Receive the user input, parse, execute (if it is a valid command) and stores
- * in the history (when it isn't a empty line).
- * @param input: empty string, sh: the shell
+ * @brief Receive the user input, parse, execute (if it is a valid command) and 
+ * stores in the history (when it isn't a empty line).
+ * 
+ * @param input: empty string,
+ * @param sh: the shell
  */
-
 void	interface(char *input, t_shell *sh);
 
 /**
- * Finalizes the shell
+ * @brief Finalizes the shell
+ * 
  * @param sh: the shell
  */
-
 void	free_sh(t_shell *sh);
 
 /**
- * Finilizes the shell and exits with EXIT_FAILURE
+ * @brief Finilizes the shell and exits with EXIT_FAILURE
+ * 
  * @param sh: the shell
  */
-
 void	error(t_shell *sh);
 
 /**
- * Search for name in env variables and return its value.
- * @param name: the env name, @param sh: the shell.
+ * @brief Search for name in env variables and return its value
+ * 
+ * @param name: the env name
+ * @param sh: the shell
+ * @return the value of the asked environ variable
  */
-
 char	*get_env_value(const char *name, t_shell *sh);
+
+/**
+ * @brief Generate the argv array
+ * 
+ * @param tokens: the tokens aquired after the user input
+ * @return the arguments array
+ */
+char	**gen_argv(t_token *tokens);
+
+/**
+ * @brief Generate the envp array
+ * 
+ * @param env: the environ linked list
+ * @return the environ array
+ */
+char	**gen_envp(t_env *env);
 
 #endif
