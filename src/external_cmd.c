@@ -10,8 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <external/external_cmd.h>
+#include <minishell.h>
 
+/**
+ * @brief Try access() the cmd through each path in environment, return the
+ * sucessfull one with the name of the executable
+ *
+ * @param cmd: The name of the command
+ * @param syspath: The path environment variable
+ * @return the command/executable fullname
+ */
 static char	*choose_path(char *cmd, char *syspath)
 {
 	char	**spl_path;
@@ -24,37 +32,47 @@ static char	*choose_path(char *cmd, char *syspath)
 	path_i = 0;
 	while (spl_path[path_i] != NULL)
 	{
-		ft_asprintf(test_p, "%s/%s", spl_path[path_i], cmd);
+		ft_asprintf(&test_p, "%s/%s", spl_path[path_i], cmd);
 		if (access(cmd, F_OK))
 			return (test_p);
-		safe_free(test_p);
+		safe_free((void **)&test_p);
 		++path_i;
 	}
 	return (NULL);
 }
 
+/**
+ * @brief After a fork() the program acknowledge it is running in subprocess 
+ * (which will became the new process) and enter this function to execve() the
+ * desired command.
+ *
+ * @param tokens: The tokens obtained from user input
+ * @param sh: The shell
+ * @return the exit code from the new process
+ */
 static int	sub_process(t_token *tokens, t_shell *sh)
 {
 	char	*full_name;
 	char	**argv;
 	char	**envp;
 
-	full_name = choose_path(tokens, get_env_value("PATH", sh));
+	full_name = choose_path(tokens->value, get_env_value("PATH", sh));
 	if (!full_name)
 		return (0);
 	argv = gen_argv(tokens);
-	envp = gen_envp(sh);
+	envp = gen_envp(sh->env);
 	if (!argv || !envp)
 		return (0);
 	execve(full_name, argv, envp);
-	safe_free(argv);
-	safe_free(envp);
+	safe_free((void **)&argv);
+	safe_free((void **)&envp);
 	return (1);
 }
 
 void	exec_extcmd(t_token *tokens, t_shell *sh)
 {
-	int	wstatus;
+	int		wstatus;
+	pid_t   new_pid;
 
 	new_pid = fork();
 	if (!new_pid)

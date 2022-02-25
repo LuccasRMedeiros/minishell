@@ -33,7 +33,7 @@ char	*get_env_value(const char *name, t_shell *sh)
 /**
  * @brief Count how many strings will be in the argv array (aka argc).
  * 
- * @param tokens: the tokens generated after user input 
+ * @param tokens: The tokens generated after user input 
  * @return the amount of arguments
  */
 static int	cnt_argv(t_token *tokens)

@@ -53,11 +53,10 @@ INCLUDES = -I ./lib/libft/includes \
 		   -I ./src
 
 vpath %.c src src/env src/prompt src/lexer
-SRC :=	minishell.c get_pwd.c prompt.c interface.c free.c \
+SRC :=	minishell.c get_pwd.c prompt.c interface.c free.c external_cmd.c utils.c \
 		error.c parse.c get_env.c set_env.c \
 		get_value.c tokenizer.c tokens.c \
 		helpers.c quote.c \
-		external.c utils.c \
 
 OBJ_PATH = ./build
 OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))

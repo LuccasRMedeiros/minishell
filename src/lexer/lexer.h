@@ -25,7 +25,7 @@ typedef enum e_type
 
 typedef struct s_token
 {
-	const char		*value;
+	char			*value;
 	struct s_token	*next;
 }	t_token;
 

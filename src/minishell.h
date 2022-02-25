@@ -94,4 +94,13 @@ char	**gen_argv(t_token *tokens);
  */
 char	**gen_envp(t_env *env);
 
+/**
+ * @brief Execute the command asked by the user (when it is a external command
+ * or program).
+ *
+ * @param tokens: The tokens generated from the user input.
+ * @param sh: The shell
+ */
+void	exec_extcmd(t_token *tokens, t_shell *sh);
+
 #endif
