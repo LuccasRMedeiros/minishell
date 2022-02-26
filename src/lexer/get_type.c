@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:28:34 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/20 19:47:37 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/26 14:10:16 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * Test if the token is a built-in
  */
 
-static int	isbuiltin(char *value)
+static int	isbuiltin(const char *value)
 {
 	size_t	v_sz;
 
@@ -36,13 +36,13 @@ static int	isbuiltin(char *value)
 	return (0);
 }
 
-t_type	get_type(size_t i, char *value)
+t_type	get_type(const int order, const char *value)
 {
-	if (i == 0)
+	if (order == 0)
 	{
 		if (isbuiltin(value))
 			return (BUILTIN);
-		return (COMMAND);
+		return (EXTERNAL);
 	}
 	else
 		return (PARAMETER);

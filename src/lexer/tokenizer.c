@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/20 19:48:07 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/26 16:10:43 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * the list of tokens.
  */
 
-static t_token	*generate_token(char **input)
+static t_token	*generate_token(INTchar **input)
 {
 	char	*value;
 

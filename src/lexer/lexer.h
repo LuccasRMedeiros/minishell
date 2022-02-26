@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/19 23:15:59 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/26 14:09:15 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,27 @@
 typedef enum e_type
 {
 	BUILTIN,
-	COMMAND,
+	EXTERNAL,
 	PARAMETER,
-	STRING_LITERAL,
+	PIPE,
+	REDIRECT,
+	FILE_R,
 }	t_type;
 
 typedef struct s_token
 {
-	char			*value;
+	t_type			type;
+	const char		*value;
 	struct s_token	*next;
 }	t_token;
 
 /**
- * t_token constructor
- * @param type: which type this token is, value: the value for the token
+ * @brief t_token constructor
+ *
+ * @param type: Which type this token is
+ * @param value: The value for the token
  */
-
-t_token	*new_token(const char *value);
+t_token	*new_token(t_type type, const char *value);
 
 /**
  * t_token destructor
