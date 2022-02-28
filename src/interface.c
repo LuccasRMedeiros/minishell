@@ -22,7 +22,8 @@ static char	validate(char *input, t_shell *sh)
 	if (ft_strncmp("exit", input, ft_strlen(input)) == 0)
 		return (1);
 	tokens = tokenizer(input);
-	exec_extcmd(tokens, sh);
+	if (tokens->type == EXTERNAL)
+		exec_extcmd(tokens, sh);
 	clear_token_list(tokens);
 	add_history(input);
 	return (0);

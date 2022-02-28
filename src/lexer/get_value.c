@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:52:29 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/20 19:03:19 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/28 10:05:03 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #include <stdio.h>
 
 /**
- * Calculate the total size of the token value.
+ * @brief Count how many characters a value string will contain.
+ *
+ * @param input: A pointer to input string.
+ * @return the predicted size.
  */
-
 static size_t	val_len(char **input)
 {
 	size_t	len;

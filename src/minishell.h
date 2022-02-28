@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/21 23:07:19 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/25 22:30:59 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # include <ft_printf.h>
 # include <stdio.h>
+# include <sys/wait.h>
 # include <lexer/lexer.h>
 
 /**

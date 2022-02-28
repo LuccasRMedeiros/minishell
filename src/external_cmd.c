@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:19:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/22 23:02:37 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/28 11:20:18 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
  * @param syspath: The path environment variable
  * @return the command/executable fullname
  */
-static char	*choose_path(char *cmd, char *syspath)
+static char	*choose_path(const char *cmd, char *syspath)
 {
 	char	**spl_path;
 	char	*test_p;
 	size_t	path_i;
 
 	if (access(cmd, F_OK))
-		return (cmd);
+		return ((char *)cmd);
 	spl_path = ft_split(syspath, ':');
 	path_i = 0;
 	while (spl_path[path_i] != NULL)
@@ -58,11 +58,14 @@ static int	sub_process(t_token *tokens, t_shell *sh)
 
 	full_name = choose_path(tokens->value, get_env_value("PATH", sh));
 	if (!full_name)
-		return (0);
+	{
+		printf("no existence\n");
+		exit(0);
+	}
 	argv = gen_argv(tokens);
 	envp = gen_envp(sh->env);
 	if (!argv || !envp)
-		return (0);
+		exit(0);
 	execve(full_name, argv, envp);
 	safe_free((void **)&argv);
 	safe_free((void **)&envp);

@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 22:05:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/22 23:02:38 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/25 22:44:50 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**gen_argv(t_token *tokens)
 	i = 0;
 	while (tokens)
 	{
-		argv[i] = tokens->value;
+		argv[i] = (char *)tokens->value;
 		tokens = tokens->next;
 		++i;
 	}
@@ -106,5 +106,5 @@ char	**gen_envp(t_env *env)
 		env = env->next;
 		++i;
 	}
-	return (env);
+	return (envp);
 }
