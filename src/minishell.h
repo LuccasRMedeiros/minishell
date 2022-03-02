@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/25 22:30:59 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/02 08:18:16 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,17 @@ void	error(t_shell *sh);
 /**
  * @brief Search for name in env variables and return its value
  * 
- * @param name: the env name
- * @param sh: the shell
- * @return the value of the asked environ variable
+ * @param name: The env name.
+ * @param sh: The shell.
+ * @return the value of the asked environ variable.
  */
 char	*get_env_value(const char *name, t_shell *sh);
 
 /**
  * @brief Generate the argv array
  * 
- * @param tokens: the tokens aquired after the user input
+ * @param full_name: The full name of the program.
+ * @param tokens: The tokens aquired after the user input.
  * @return the arguments array
  */
 char	**gen_argv(t_token *tokens);

@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:19:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/01 22:09:19 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/02 08:18:16 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,13 @@ static int	sub_process(t_token *tokens, t_shell *sh)
 	argv = gen_argv(tokens);
 	envp = gen_envp(sh->env);
 	if (!argv || !envp)
+	{
 		exit(0);
-	execve(full_name, argv, envp);
+	}
+/* DEBUG */	int execve_ret =/* DEBUG */ execve(full_name, argv, envp);
+// DEBUG ------------------------------
+	printf("\e[0;33mresult: %i\e[0m\n", execve_ret);
+// ------------------------------------
 	safe_free((void **)&argv);
 	safe_free((void **)&envp);
 	exit (1);

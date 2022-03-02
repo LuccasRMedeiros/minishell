@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 22:05:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/25 22:44:50 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:07:11 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**gen_argv(t_token *tokens)
 	size_t	i;
 
 	argc = cnt_argv(tokens);
-	argv = malloc(sizeof (char *) * argc);
+	argv = malloc(sizeof (char *) * (argc + 1));
 	if (!argv)
 		return (NULL);
 	i = 0;
@@ -66,6 +66,7 @@ char	**gen_argv(t_token *tokens)
 		tokens = tokens->next;
 		++i;
 	}
+	argv[i] = NULL;
 	return (argv);
 }
 
@@ -96,7 +97,7 @@ char	**gen_envp(t_env *env)
 	size_t	i;
 
 	envp_sz = env_size(env);
-	envp = malloc(sizeof (char *) * envp_sz);
+	envp = malloc(sizeof (char *) * (envp_sz + 1));
 	if (!envp)
 		return (NULL);
 	i = 0;
@@ -106,5 +107,6 @@ char	**gen_envp(t_env *env)
 		env = env->next;
 		++i;
 	}
+	envp[i] = NULL;
 	return (envp);
 }
