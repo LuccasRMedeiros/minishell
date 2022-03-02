@@ -24,6 +24,8 @@ static char	validate(char *input, t_shell *sh)
 	tokens = tokenizer(input);
 	if (tokens->type == EXTERNAL)
 		exec_extcmd(tokens, sh);
+	else if (tokens->type == BUILTIN)
+		builtin_cmd(tokens, sh);
 	clear_token_list(tokens);
 	add_history(input);
 	return (0);

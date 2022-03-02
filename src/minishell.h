@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/02 08:18:16 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:26:30 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <lexer/lexer.h>
+# include <builtin/builtin.h>
 
 /**
  * @brief Hold the environment variables separatelly
@@ -104,5 +105,13 @@ char	**gen_envp(t_env *env);
  * @param sh: The shell
  */
 void	exec_extcmd(t_token *tokens, t_shell *sh);
+
+/**
+ * @brief Execute the built-in command asked by the user.
+ *
+ * @param tokens: The tokens generated from the user input.
+ * @param sh: The shell.
+ */
+void	builtin_cmd(t_token *tks, t_shell *sh);
 
 #endif
