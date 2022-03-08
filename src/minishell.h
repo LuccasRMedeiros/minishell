@@ -6,13 +6,13 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 15:06:46 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/02 08:18:16 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
- * Contains all the definitions of macros, enums, unions, structures and types
- * (and also its initializers and destroyers). The commom depedencies are
+ * Contains all the definitions of macros, enums, unions, structures and
+ * types (and also its initializers and destroyers). The commom depedencies are
  * included here.
  */
 
@@ -21,12 +21,12 @@
 
 # include <ft_printf.h>
 # include <stdio.h>
+# include <sys/wait.h>
 # include <lexer/lexer.h>
 
 /**
- * Hold the environment variables separatelly
+ * @brief Hold the environment variables separatelly
  */
-
 typedef struct s_env
 {
 	const char		*name;
@@ -35,9 +35,8 @@ typedef struct s_env
 }	t_env;
 
 /**
- * Hold general information of the shell
+ * @brief Hold general information of the shell
  */
-
 typedef struct s_shell
 {
 	t_env	*env;
@@ -49,25 +48,61 @@ typedef struct s_shell
 }	t_shell;
 
 /**
- * Receive the user input, parse, execute (if it is a valid command) and stores
- * in the history (when it isn't a empty line).
- * @param input: empty string, sh: the shell
+ * @brief Receive the user input, parse, execute (if it is a valid command) and 
+ * stores in the history (when it isn't a empty line).
+ * 
+ * @param input: empty string,
+ * @param sh: the shell
  */
-
 void	interface(char *input, t_shell *sh);
 
 /**
- * Finalizes the shell
+ * @brief Finalizes the shell
+ * 
  * @param sh: the shell
  */
-
 void	free_sh(t_shell *sh);
 
 /**
- * Finilizes the shell and exits with EXIT_FAILURE
+ * @brief Finilizes the shell and exits with EXIT_FAILURE
+ * 
  * @param sh: the shell
  */
-
 void	error(t_shell *sh);
+
+/**
+ * @brief Search for name in env variables and return its value
+ * 
+ * @param name: The env name.
+ * @param sh: The shell.
+ * @return the value of the asked environ variable.
+ */
+char	*get_env_value(const char *name, t_shell *sh);
+
+/**
+ * @brief Generate the argv array
+ * 
+ * @param full_name: The full name of the program.
+ * @param tokens: The tokens aquired after the user input.
+ * @return the arguments array
+ */
+char	**gen_argv(t_token *tokens);
+
+/**
+ * @brief Generate the envp array
+ * 
+ * @param env: the environ linked list
+ * @return the environ array
+ */
+char	**gen_envp(t_env *env);
+
+/**
+ * @brief Execute the command asked by the user (when it is a external command
+ * or program).
+ *
+ * @param tokens: The tokens generated from the user input.
+ * @param sh: The shell
+ */
+void	exec_extcmd(t_token *tokens, t_shell *sh);
 
 #endif

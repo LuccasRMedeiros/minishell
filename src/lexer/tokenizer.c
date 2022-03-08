@@ -6,80 +6,51 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/03 07:16:44 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/28 10:47:06 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
+#include <lexer/helpers.h>
 
 /**
- * Count the amount of tokens to create a array of them.
+ * @brief Generate a token and return it. The subroutine exists to help to 
+ * construct the list of tokens.
+ *
+ * @param order: The order the token appear on the list.
+ * @param input: The pointer to the input string.
+ * @return one node with one value accquired and its type.
  */
-
-static size_t	cnt_tokens(char *input)
+static t_token	*generate_token(int order, char **input)
 {
-	size_t	cnt;
-	size_t	i;
-	int		quotes;
-	int		is_word;
-
-	cnt = 0;
-	i = 0;
-	quotes = 0;
-	is_word = 0;
-	while (input[i] != '\0' && input[i] != '#')
-	{
-		if (ft_isalnum(input[i]) && !is_word)
-		{
-			++cnt;
-			is_word = 1;
-		}
-		else if (lex_isspace(input[i]) && quotes % 2 == 0)
-			is_word = 0;
-		else if (input[i] == '\"' || input[i] == '\'')
-			++quotes;
-		++i;
-	}
-	return (cnt);
-}
-
-t_token	**tokenizer(char *input)
-{
-	size_t	n_tokens;
-	size_t	i;
-	t_type	type;
 	char	*value;
-	t_token	**tokens;
+	t_type	type;
 
-	i = 0;
-	n_tokens = cnt_tokens(input);
-	tokens = ft_calloc(n_tokens + 1, sizeof (t_token *));
-	while (i < n_tokens)
-	{
-		type = get_type(i, input);
-		if (type != INVALID)
-			value = get_value(type, input);
-		else
-			value = NULL;
-		tokens[i] = new_token(type, value);
-		input += ft_strlen(value);
-		++i;
-	}
-	tokens[i] = NULL;
-	return (tokens);
+	value = get_value(input);
+	if (!value)
+		return (NULL);
+	type = get_type(order, value);
+	return (new_token(value, type));
 }
 
-void	discard_tokens(t_token **tokens)
+t_token	*tokenizer(char *input)
 {
-	size_t	i;
+	t_token	*head;
+	t_token	*tokens;
+	int		order;
 
-	i = 0;
-	while (tokens != NULL)
+	clear_quote();
+	head = NULL;
+	while (is_space(*input))
+		++input;
+	head = generate_token(0, &input);
+	tokens = head;
+	order = 1;
+	while (tokens)
 	{
-		del_token(tokens[i]);
-		++i;
+		tokens->next = generate_token(order, &input);
+		tokens = tokens->next;
+		++order;
 	}
-	del_token(tokens[i]);
-	free(tokens);
-	tokens = NULL;
+	return (head);
 }

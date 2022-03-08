@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_new_del.c                                    :+:      :+:    :+:   */
+/*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 23:04:44 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 14:51:03 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/28 10:50:34 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
 
-void	del_token(t_token *del)
-{
-	char	*value;
-
-	value = (char *)del->value;
-	free(value);
-	value = NULL;
-	del->type = INVALID;
-	free(del);
-	del = NULL;
-}
-
-t_token	*new_token(t_type type, const char *value)
+t_token	*new_token(const char *value, t_type type)
 {
 	t_token	*new;
 
 	new = ft_calloc(1, sizeof (*new));
 	if (!new)
 		return (NULL);
-	new->type = type;
 	new->value = value;
+	new->type = type;
+	new->next = NULL;
 	return (new);
+}
+
+void	clear_token_list(t_token *del)
+{
+	t_token	*aux;
+	char	*value;
+
+	while (del != NULL)
+	{
+		aux = del->next;
+		value = (char *)del->value;
+		free(value);
+		value = NULL;
+		free(del);
+		del = NULL;
+		del = aux;
+	}
 }

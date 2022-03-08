@@ -6,79 +6,66 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 00:52:29 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/02 20:34:31 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/02/28 10:05:03 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
+#include <lexer/helpers.h>
+#include <stdio.h>
 
 /**
- * Test if the inchar (input char) is equal stop. When stop is \0, isstop also
- * test if inchar is a white space.
+ * @brief Count how many characters a value string will contain.
  *
- * Return the result of the test.
+ * @param input: A pointer to input string.
+ * @return the predicted size.
  */
-
-static int	isstop(char inchar, char stop)
-{
-	if (inchar == '#')
-		return (1);
-	if (stop == '\0')
-		return (lex_isspace(inchar) == 1 || inchar == stop);
-	else
-		return (inchar == stop);
-}
-
-/**
- * Predict the size of string value.
- *
- * Return the predicted size of string value.
- */
-
-static size_t	vallen(t_type type, char *input)
+static size_t	val_len(char **input)
 {
 	size_t	len;
-	char	stop;
+	char	*aux;
 
+	if (!(**input))
+		return (0);
 	len = 0;
-	if (type == STRING_LITERAL)
-		stop = quote('g');
-	else
-		stop = '\0';
-	while (*input == quote('g'))
-		++input;
-	while (isstop(*input, stop) == 0)
+	while (is_space(**input))
+		++(*input);
+	aux = *input;
+	while (is_stop(&aux) == 0)
 	{
-		if (ft_isalnum(*input) || type == STRING_LITERAL)
+		if (is_quote(*aux) && get_quote() == '\0')
+			set_quote(aux);
+		if (*aux != get_quote())
 			++len;
-		++input;
+		++aux;
 	}
 	return (len);
 }
 
-char	*get_value(t_type type, char *input)
+char	*get_value(char **input)
 {
-	size_t	len;
 	size_t	i;
+	size_t	len;
 	char	*ret;
 
-	while (lex_isspace(*input))
-		++input;
-	len = vallen(type, input);
 	i = 0;
-	ret = ft_calloc(len + 1, sizeof (*ret));
+	len = val_len(input);
+	if (!len)
+		return (NULL);
+	ret = malloc(sizeof (*ret) * (len + 1));
 	if (!ret)
 		return (NULL);
-	while (i < len)
+	while (is_stop(input) == 0)
 	{
-		if (ft_isalnum(*input)
-			|| (type == STRING_LITERAL && *input != quote('g')))
+		if (is_quote(**input) && get_quote() == '\0')
+			set_quote(*input);
+		if (**input != get_quote())
 		{
-			ret[i] = *input;
+			ret[i] = **input;
 			++i;
 		}
-		++input;
+		++(*input);
 	}
-	quote('d');
+	ret[i] = '\0';
 	return (ret);
 }
