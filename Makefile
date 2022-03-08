@@ -38,7 +38,7 @@ define MINISHELL
 endef
 export MINISHELL
 
-CC = clang
+CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 SANITIZERS = -g3
 
