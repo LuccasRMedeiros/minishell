@@ -65,10 +65,7 @@ static int	sub_process(t_token *tokens, t_shell *sh)
 	{
 		exit(0);
 	}
-/* DEBUG */	int execve_ret =/* DEBUG */ execve(full_name, argv, envp);
-// DEBUG ------------------------------
-	printf("\e[0;33mresult: %i\e[0m\n", execve_ret);
-// ------------------------------------
+	execve(full_name, argv, envp);
 	safe_free((void **)&argv);
 	safe_free((void **)&envp);
 	exit (1);
