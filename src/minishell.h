@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/14 17:27:33 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 18:40:09 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <ft_printf.h>
 # include <stdio.h>
 # include <sys/wait.h>
-# include <lexer/lexer.h>
 
 /**
  * @brief Hold the environment variables separatelly
@@ -63,38 +62,5 @@ void	free_sh();
  * @brief Finilizes the shell and exits with EXIT_FAILURE
  */
 void	error();
-
-/**
- * @brief Search for name in env variables and return its value
- * 
- * @param name: The env name.
- * @return the value of the asked environ variable.
- */
-char	*get_env_value(const char *name);
-
-/**
- * @brief Generate the argv array
- * 
- * @param full_name: The full name of the program.
- * @param tokens: The tokens aquired after the user input.
- * @return the arguments array
- */
-char	**gen_argv(t_token *tokens);
-
-/**
- * @brief Generate the envp array
- * 
- * @param env: the environ linked list
- * @return the environ array
- */
-char	**gen_envp(t_env *env);
-
-/**
- * @brief Execute the command asked by the user (when it is a external command
- * or program).
- *
- * @param tokens: The tokens generated from the user input.
- */
-void	exec_extcmd(t_token *tokens);
 
 #endif
