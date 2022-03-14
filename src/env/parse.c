@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:33:11 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 15:04:53 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:42:03 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,19 @@ void	parse_env()
 {
 	size_t	i;
 	t_env	*env;
+	char	*e_name;
+	char	*e_value;
 
-	g_sh->env = ft_calloc(1, sizeof(t_env));
-	i = 0;
-	env = g_sh->env;
-	while (environ[i] != NULL)
+	i = -1;
+	while (environ[++i] != NULL)
 	{
-		env->name = name(environ[i]);
-		if (env->name == NULL)
-			error(g_sh);
-		env->value = value(environ[i]);
-		if (env->value == NULL)
-			error(g_sh);
-		if (environ[i + 1] == NULL)
-			break ;
-		env->next = ft_calloc(1, sizeof(t_env));
-		env = env->next;
+		e_name = name(environ[i]);
+		e_value = value(environ[i]);
+		env = set_env(e_name, e_value);
+		safe_free((void **)&e_name);
+		safe_free((void **)&e_value);
 		if (env == NULL)
-			error(g_sh);
-		i++;
+			error();
 	}
 	set_default_envs();
 }

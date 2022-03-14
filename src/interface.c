@@ -6,7 +6,7 @@
 /*	 By: vgoncalv <vgoncalv@student.42sp.org.br>	+#+  +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2022/01/27 20:12:16 by vgoncalv		   #+#	  #+#			  */
-/*   Updated: 2022/03/14 14:57:48 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:34:05 by vgoncalv         ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	interface(char *input)
 	if (validate(input))
 	{
 		safe_free((void **)&input);
-		free_sh(g_sh);
-		exit(EXIT_SUCCESS);
+		return ;
 	}
 	safe_free((void **)&input);
 	interface(input);

@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 20:21:21 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 14:56:16 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:51:36 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ static void	free_env()
 	while (env != NULL)
 	{
 		next = env->next;
-		if (env->name != NULL)
-			safe_free((void **)&env->name);
-		if (env->value != NULL)
-			safe_free((void **)&env->value);
-		free(env);
+		safe_free((void **)&env->name);
+		safe_free((void **)&env->value);
+		safe_free((void **)&env);
 		env = next;
 	}
+	g_sh->env = NULL;
 }
 
 void	free_sh()
