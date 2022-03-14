@@ -53,7 +53,7 @@ INCLUDES = -I ./lib/libft/includes \
 		   -I ./src
 
 vpath %.c src src/env src/prompt src/lexer
-SRC :=	minishell.c get_pwd.c prompt.c interface.c free.c external_cmd.c utils.c \
+SRC :=	minishell.c get_pwd.c prompt.c interactive.c free.c external_cmd.c utils.c \
 		error.c parse.c get_env.c set_env.c \
 		get_value.c get_type.c tokenizer.c tokens.c \
 		helpers.c quote.c \

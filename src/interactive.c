@@ -6,7 +6,7 @@
 /*	 By: vgoncalv <vgoncalv@student.42sp.org.br>	+#+  +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2022/01/27 20:12:16 by vgoncalv		   #+#	  #+#			  */
-/*   Updated: 2022/03/14 15:34:05 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:16:42 by vgoncalv         ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ static char	validate(char *input)
 	return (0);
 }
 
-void	interface(char *input)
+void	interactive()
 {
+	char	*input;
+
 	input = prompt(g_sh);
 	if (validate(input))
 	{
@@ -38,5 +40,5 @@ void	interface(char *input)
 		return ;
 	}
 	safe_free((void **)&input);
-	interface(input);
+	interactive(input);
 }
