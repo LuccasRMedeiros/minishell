@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/02 08:18:16 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:58:34 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,37 +47,33 @@ typedef struct s_shell
 	t_env	*old_pwd;
 }	t_shell;
 
+extern t_shell	*g_sh;
+
 /**
  * @brief Receive the user input, parse, execute (if it is a valid command) and 
  * stores in the history (when it isn't a empty line).
  * 
  * @param input: empty string,
- * @param sh: the shell
  */
-void	interface(char *input, t_shell *sh);
+void	interface(char *input);
 
 /**
  * @brief Finalizes the shell
- * 
- * @param sh: the shell
  */
-void	free_sh(t_shell *sh);
+void	free_sh();
 
 /**
  * @brief Finilizes the shell and exits with EXIT_FAILURE
- * 
- * @param sh: the shell
  */
-void	error(t_shell *sh);
+void	error();
 
 /**
  * @brief Search for name in env variables and return its value
  * 
  * @param name: The env name.
- * @param sh: The shell.
  * @return the value of the asked environ variable.
  */
-char	*get_env_value(const char *name, t_shell *sh);
+char	*get_env_value(const char *name);
 
 /**
  * @brief Generate the argv array
@@ -101,8 +97,7 @@ char	**gen_envp(t_env *env);
  * or program).
  *
  * @param tokens: The tokens generated from the user input.
- * @param sh: The shell
  */
-void	exec_extcmd(t_token *tokens, t_shell *sh);
+void	exec_extcmd(t_token *tokens);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:19:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/02 08:18:16 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:59:17 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	sub_process(t_token *tokens, t_shell *sh)
 	char	**argv;
 	char	**envp;
 
-	full_name = choose_path(tokens->value, get_env_value("PATH", sh));
+	full_name = choose_path(tokens->value, get_env_value("PATH"));
 	if (!full_name)
 		exit(0);
 	argv = gen_argv(tokens);
@@ -71,14 +71,14 @@ static int	sub_process(t_token *tokens, t_shell *sh)
 	exit (1);
 }
 
-void	exec_extcmd(t_token *tokens, t_shell *sh)
+void	exec_extcmd(t_token *tokens)
 {
 	int		wstatus;
 	pid_t   new_pid;
 
 	new_pid = fork();
 	if (!new_pid)
-		sub_process(tokens, sh);
+		sub_process(tokens, g_sh);
 	else
 		wait(&wstatus);
 }

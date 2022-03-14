@@ -6,18 +6,18 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 20:21:21 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/28 21:27:48 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:56:16 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	free_env(t_shell *sh)
+static void	free_env()
 {
 	t_env	*env;
 	t_env	*next;
 
-	env = sh->env;
+	env = g_sh->env;
 	while (env != NULL)
 	{
 		next = env->next;
@@ -30,8 +30,8 @@ static void	free_env(t_shell *sh)
 	}
 }
 
-void	free_sh(t_shell *sh)
+void	free_sh()
 {
-	free_env(sh);
-	ft_bzero(sh, sizeof(t_shell));
+	free_env();
+	safe_free((void **)g_sh);
 }

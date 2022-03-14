@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 10:50:14 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 11:05:05 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:05:00 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,25 @@ static char	get_name_and_value(const char **name, char **value)
 	return (0);
 }
 
-t_env	*set_env(const char *name, char *value, t_shell *sh)
+t_env	*set_env(const char *name, char *value)
 {
 	t_env	*env;
 	t_env	*res;
 
 	if (get_name_and_value(&name, &value))
 		return (NULL);
-	res = get_env(name, sh);
+	res = get_env(name);
 	if (res == NULL)
 		res = ft_calloc(1, sizeof(t_env));
 	if (res == NULL)
 		return (NULL);
 	res->name = name;
 	res->value = value;
-	if (sh->env == NULL)
-		sh->env = res;
+	if (g_sh->env == NULL)
+		g_sh->env = res;
 	else
 	{
-		env = sh->env;
+		env = g_sh->env;
 		while (env->next != NULL)
 			env = env->next;
 		env->next = res;

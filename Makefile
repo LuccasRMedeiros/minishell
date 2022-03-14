@@ -6,7 +6,7 @@
 #    By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#              #
-#    Updated: 2022/02/28 10:55:04 by lrocigno         ###   ########.fr        #
+#    Updated: 2022/03/14 15:00:18 by vgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ export MINISHELL
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-SANITIZERS = -g3
+SANITIZERS = -g3 -fsanitize=address
 
 LIB_PATH = ./lib
 LIBFT_PATH = $(LIB_PATH)/libft
