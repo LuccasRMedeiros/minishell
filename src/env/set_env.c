@@ -6,46 +6,55 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 10:50:14 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 15:05:00 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:28:47 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <env/env.h>
 
-static char	get_name_and_value(const char **name, char **value)
+static t_env	*safe_get_env(const char *name)
 {
-	if (*value == NULL)
-		*value = ft_strdup("");
-	else
-		*value = ft_strdup(*value);
-	*name = ft_strdup(*name);
-	if (name == NULL || value == NULL)
-		return (1);
-	return (0);
+	t_env	*res;
+	t_env	*env;
+
+	res = get_env(name);
+	if (res == NULL)
+	{
+		res = ft_calloc(1, sizeof(t_env));
+		res->name = ft_strdup(name);
+		if (res->name == NULL)
+		{
+			safe_free((void **)&(res->name));
+			safe_free((void **)&res);
+			return (NULL);
+		}
+		env = g_sh->env;
+		if (env == NULL)
+			g_sh->env = env;
+		else
+		{
+			while (env->next != NULL)
+				env = env->next;
+			env->next = res;
+		}
+	}
+	return (res);
 }
 
 t_env	*set_env(const char *name, char *value)
 {
-	t_env	*env;
 	t_env	*res;
+	char	*new_value;
 
-	if (get_name_and_value(&name, &value))
-		return (NULL);
-	res = get_env(name);
-	if (res == NULL)
-		res = ft_calloc(1, sizeof(t_env));
-	if (res == NULL)
-		return (NULL);
-	res->name = name;
-	res->value = value;
-	if (g_sh->env == NULL)
-		g_sh->env = res;
+	if (value == NULL)
+		new_value = ft_strdup("");
 	else
-	{
-		env = g_sh->env;
-		while (env->next != NULL)
-			env = env->next;
-		env->next = res;
-	}
+		new_value = ft_strdup(value);
+	if (new_value == NULL)
+		return (NULL);
+	res = safe_get_env(name);
+	if (res == NULL)
+		return (NULL);
+	res->value = new_value;
 	return (res);
 }
