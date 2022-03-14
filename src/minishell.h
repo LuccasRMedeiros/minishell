@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/14 14:58:34 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:27:33 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,9 @@ typedef struct s_shell
 extern t_shell	*g_sh;
 
 /**
- * @brief Receive the user input, parse, execute (if it is a valid command) and 
- * stores in the history (when it isn't a empty line).
- * 
- * @param input: empty string,
+ * @brief Launches the shell in interactive mode
  */
-void	interface(char *input);
+void	interactive();
 
 /**
  * @brief Finalizes the shell
