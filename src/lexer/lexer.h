@@ -6,77 +6,97 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/28 10:54:23 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/14 18:51:08 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include <libft.h>
+# include <minishell.h>
 
-/**
- * @brief Lists the possible types for tokens.
- */
-typedef enum e_type
+typedef enum e_token_type
 {
-	BUILTIN,
-	EXTERNAL,
-	PARAMETER,
-	PIPE,
-	REDIRECT,
-	FILE_R,
-}	t_type;
+  T_WORD,
+  T_OPERATOR,
+  TOKEN_COUNT,
+}	t_token_type;
 
-/**
- * @brief Linked list that hold the value and the type of a token, also refers
- * to the next token.
- */
 typedef struct s_token
 {
+	t_token_type	type;
 	const char		*value;
-	t_type			type;
-	struct s_token	*next;
+    struct s_token	*prev;
+    struct s_token	*next;
 }	t_token;
 
 /**
- * @brief t_token constructor
+ * @brief Creates a new token
  *
- * @param type: Which type this token is.
- * @param value: The value for the token.
+ * @see: struct s_token
+ * @param type: the type of the created token
+ * @param prev: the previous token in the list
+ * @return: the new token
  */
-t_token	*new_token(const char *value, const t_type type);
+t_token	*new_token(t_token_type type, t_token *prev);
 
 /**
- * @brief Clear a list of tokens.
+ * @brief: Clears the tokens list
  *
- * @param del_list: The list of tokens.
+ * @param token: the head of the token list
+ * @return: always returns NULL
  */
-void	clear_token_list(t_token *del_list);
+t_token	*clear_tokens(t_token *token);
 
 /**
- * @brief Extract the value using the type as reference.
+ * @brief: Evaluates if character is space, tab or new line
  *
- * @param type: Which type the token is, input: the user input.
- * @return a string with the value extracted from "input"
+ * @param c: the evaluated character
+ * @return: a non-zero value if it is a space, tab or new line
  */
-char	*get_value(char **input);
+char	is_space(char c);
 
 /**
- * @brief Tokenizes the input sent by the user.
+ * @brief: Evaluates if input is operator
  *
- * @param input: The user input.
- * @return the list of tokens.
+ * @param input: the evaluated input
+ * @return: a non-zero value if it is a operator
  */
-t_token	*tokenizer(char *input);
+char	is_operator(char *input);
 
 /**
- * @brief Decide which type the tokens is based on its order and content.
+ * @brief: Evaluates if input is metacharacter
  *
- * @param order: The order this token is on the list.
- * @param value: The value of the token.
- * @return the type of the token.
+ * @param input: the evaluated input
+ * @return: a non-zero value if it is a metacharacter
  */
-t_type	get_type(const int order, const char *value);
+char	is_metachar(char *input);
+
+/**
+ * @brief: Gets word from current input and updates the offset
+ *
+ * @param input
+ * @param offset
+ * @return: the word value
+ */
+char	*word(char *input, size_t *offset);
+
+/**
+ * @brief: Gets operator from current input and updates the offset
+ *
+ * @param input
+ * @param offset
+ * @return: the operator value
+ */
+char	*operator(char *input, size_t *offset);
+
+
+/**
+ * @brief: Tokenizes the input into WORDs and OPERATORS
+ *
+ * @param input
+ * @return: the tokens list
+ */
+t_token	*tokenize(char *input);
 
 #endif
