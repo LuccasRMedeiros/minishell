@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vini <vini@42sp.org.br>                    +#+  +:+       +#+        */
+/*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/01 21:51:01 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:05:51 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 #include <minishell.h>
 #include <env/env.h>
 
+t_shell	*g_sh;
+
 int	main(void)
 {
-	t_shell	sh;
-
-	ft_bzero(&sh, sizeof(t_shell));
-	parse_env(&sh);
-	interface(NULL, &sh);
-	free_sh(&sh);
+	g_sh = ft_calloc(1, sizeof(t_shell));
+	ft_bzero(g_sh, sizeof(t_shell));
+	parse_env();
+	interface(NULL);
+	free_sh(g_sh);
 	return (EXIT_SUCCESS);
 }

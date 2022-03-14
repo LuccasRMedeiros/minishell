@@ -6,14 +6,14 @@
 /*	 By: vgoncalv <vgoncalv@student.42sp.org.br>	+#+  +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2022/01/27 20:12:16 by vgoncalv		   #+#	  #+#			  */
-/*	 Updated: 2022/02/20 20:50:43 by lrocigno		  ###	########.fr		  */
+/*   Updated: 2022/03/14 14:57:48 by vgoncalv         ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <prompt/prompt.h>
 
-static char	validate(char *input, t_shell *sh)
+static char	validate(char *input)
 {
 	t_token	*tokens;
 
@@ -23,21 +23,21 @@ static char	validate(char *input, t_shell *sh)
 		return (1);
 	tokens = tokenizer(input);
 	if (tokens->type == EXTERNAL)
-		exec_extcmd(tokens, sh);
+		exec_extcmd(tokens);
 	clear_token_list(tokens);
 	add_history(input);
 	return (0);
 }
 
-void	interface(char *input, t_shell *sh)
+void	interface(char *input)
 {
-	input = prompt(sh);
-	if (validate(input, sh))
+	input = prompt(g_sh);
+	if (validate(input))
 	{
 		safe_free((void **)&input);
-		free_sh(sh);
+		free_sh(g_sh);
 		exit(EXIT_SUCCESS);
 	}
 	safe_free((void **)&input);
-	interface(input, sh);
+	interface(input);
 }

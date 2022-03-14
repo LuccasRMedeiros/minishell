@@ -6,18 +6,18 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 22:05:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/02 12:07:11 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:58:49 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_env_value(const char *name, t_shell *sh)
+char	*get_env_value(const char *name)
 {
 	t_env	*env;
 	size_t	name_s;
 
-	env = sh->env;
+	env = g_sh->env;
 	name_s = ft_strlen(name);
 	if (!name)
 		return (NULL);
