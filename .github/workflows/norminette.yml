@@ -12,11 +12,11 @@ jobs:
   norminette:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: pip
-        uses: BSFishy/pip-action@v1
-        with:
-          packages: norminette
-          upgrade: true
-      -name: check norme
-      run: norminette src
+    - uses: actions/checkout@v2
+    - name: pip
+      uses: BSFishy/pip-action@v1
+      with:
+        packages: norminette
+        upgrade: true
+    -name: check norme
+    run: norminette src
