@@ -18,5 +18,5 @@ jobs:
       with:
         packages: norminette
         upgrade: true
-    -name: check norme
-    run: norminette src
+    - name: check norme
+      run: norminette src
