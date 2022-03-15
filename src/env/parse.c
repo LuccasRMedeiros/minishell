@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:33:11 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 15:42:03 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:04:28 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,30 @@ static char	*value(const char *env)
 	return (ft_strdup(start + 1));
 }
 
-static void	set_default_envs()
+static void	set_default_envs(void)
 {
 	g_sh->user = get_env("USER");
 	if (g_sh->user == NULL)
 	{
 		g_sh->user = set_env("USER", "user");
 		if (g_sh->user == NULL)
-			error(g_sh);
+			error();
 	}
 	g_sh->host = get_env("HOST");
 	if (g_sh->host == NULL)
 	{
 		g_sh->host = set_env("HOST", "minishell");
 		if (g_sh->host == NULL)
-			error(g_sh);
+			error();
 	}
 	g_sh->home = get_env("HOME");
 	g_sh->pwd = get_env("PWD");
 	if (g_sh->pwd == NULL)
-		error(g_sh);
+		error();
 	g_sh->old_pwd = g_sh->pwd;
 }
 
-void	parse_env()
+void	parse_env(void)
 {
 	size_t	i;
 	t_env	*env;

@@ -6,11 +6,27 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 10:50:14 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 15:56:23 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:08:23 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <env/env.h>
+
+static t_env	*new_env(const char *name)
+{
+	t_env	*env;
+
+	env = ft_calloc(1, sizeof(t_env));
+	if (env == NULL)
+		return (NULL);
+	env->name = ft_strdup(name);
+	if (env->name == NULL)
+	{
+		safe_free((void **)&(env->name));
+		safe_free((void **)&env);
+	}
+	return (env);
+}
 
 static t_env	*safe_get_env(const char *name)
 {
@@ -20,14 +36,9 @@ static t_env	*safe_get_env(const char *name)
 	res = get_env(name);
 	if (res == NULL)
 	{
-		res = ft_calloc(1, sizeof(t_env));
-		res->name = ft_strdup(name);
-		if (res->name == NULL)
-		{
-			safe_free((void **)&(res->name));
-			safe_free((void **)&res);
+		res = new_env(name);
+		if (res == NULL)
 			return (NULL);
-		}
 		env = g_sh->env;
 		if (env == NULL)
 			g_sh->env = res;

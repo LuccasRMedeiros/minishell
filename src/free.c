@@ -6,13 +6,13 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 20:21:21 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 15:51:36 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:38:48 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	free_env()
+static void	free_env(void)
 {
 	t_env	*env;
 	t_env	*next;
@@ -29,7 +29,7 @@ static void	free_env()
 	g_sh->env = NULL;
 }
 
-void	free_sh()
+void	free_sh(void)
 {
 	free_env();
 	safe_free((void **)g_sh);

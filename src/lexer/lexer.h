@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/14 18:51:08 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:42:21 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 
 typedef enum e_token_type
 {
-  T_WORD,
-  T_OPERATOR,
-  TOKEN_COUNT,
+	T_WORD,
+	T_OPERATOR,
+	TOKEN_COUNT,
 }	t_token_type;
 
 typedef struct s_token
 {
 	t_token_type	type;
 	const char		*value;
-    struct s_token	*prev;
-    struct s_token	*next;
+	struct s_token	*prev;
+	struct s_token	*next;
 }	t_token;
 
 /**
@@ -89,7 +89,6 @@ char	*word(char *input, size_t *offset);
  * @return: the operator value
  */
 char	*operator(char *input, size_t *offset);
-
 
 /**
  * @brief: Tokenizes the input into WORDs and OPERATORS

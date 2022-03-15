@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:56:32 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 18:54:19 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:41:27 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	is_operator(char *input)
 	return (0);
 }
 
-char is_metachar(char *input)
+char	is_metachar(char *input)
 {
 	if (is_space(*input))
 		return (1);
