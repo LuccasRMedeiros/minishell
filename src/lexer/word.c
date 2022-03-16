@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:47:28 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 19:07:51 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/16 00:40:38 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /**
  * @brief: Checks if a word is surrounded by quotes
  *
+ * @param start: The begining of the search on the string
  * @return: the surrounding quote character
  */
 static char	quoted_word(char *start)
@@ -37,6 +38,13 @@ static char	quoted_word(char *start)
 	return (quote);
 }
 
+/**
+ * @brief Calculate the size of a word
+ *
+ * @param input: The user input
+ * @param quote: A quote char
+ * @return the calculated size
+ */
 static size_t	wordlen(char *input, char quote)
 {
 	size_t	len;
@@ -54,6 +62,13 @@ static size_t	wordlen(char *input, char quote)
 	return (len);
 }
 
+/**
+ * @brief: Gets word from current input and updates the offset
+ *
+ * @param input
+ * @param offset
+ * @return: the word value
+ */
 char	*word(char *input, size_t *offset)
 {
 	size_t	len;

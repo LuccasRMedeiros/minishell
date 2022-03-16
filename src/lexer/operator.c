@@ -6,12 +6,19 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:19:40 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 18:23:33 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/16 00:26:29 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
 
+/**
+ * @brief: Gets operator from current input and updates the offset
+ *
+ * @param input
+ * @param offset
+ * @return: the operator value
+ */
 char	*operator(char *input, size_t *offset)
 {
     size_t		len;

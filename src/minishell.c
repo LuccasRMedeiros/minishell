@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/14 17:21:20 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/16 00:43:06 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 	(void)argc;
 	(void)argv;
 	init_shell();
-	interactive(NULL);
+	interactive();
 	free_sh(g_sh);
 	return (EXIT_SUCCESS);
 }

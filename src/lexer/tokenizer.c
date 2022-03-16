@@ -1,17 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:33:15 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 18:30:48 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/16 00:40:38 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
 
+/**
+ * @brief Define the token type
+ *
+ * @param input: The user input
+ * @return the token type
+ */
 static t_token_type get_type(char *input)
 {
   if ((is_operator(input) != 0))
@@ -19,6 +25,14 @@ static t_token_type get_type(char *input)
   return (T_WORD);
 }
 
+/**
+ * @brief Return the value for the token
+ *
+ * @param type: The token type
+ * @param input: The user input
+ * @param offset: Where the tokenization begins
+ * @return the value of the token
+ */
 static char	*token_value(t_token_type type, char *input, size_t *offset)
 {
 	if (type == T_WORD)
@@ -28,6 +42,12 @@ static char	*token_value(t_token_type type, char *input, size_t *offset)
 	return (NULL);
 }
 
+/**
+ * @brief Tokenizes the input into WORDs and OPERATORS
+ *
+ * @param input
+ * @return: the tokens list
+ */
 t_token	*tokenize(char *input)
 {
 	size_t			offset;

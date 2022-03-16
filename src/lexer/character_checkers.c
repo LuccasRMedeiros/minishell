@@ -12,7 +12,13 @@
 
 #include <lexer/lexer.h>
 
-char	is_space(char c)
+/**
+ * @brief Test if the character is a whitespace
+ * 
+ * @param c: The character
+ * @return 1 when the character is a space, 0 when not
+ */
+uint8_t	is_space(char c)
 {
 	if (c == ' ')
 		return (1);
@@ -23,7 +29,13 @@ char	is_space(char c)
 	return (0);
 }
 
-char	is_operator(char *input)
+/**
+ * @brief Test if the character is a operator
+ * 
+ * @param input: The user input
+ * @return 1 when the character is a operator, 0 when not
+ */
+uint8_t	is_operator(char *input)
 {
 	if (*input == '|')
 		return (1);
@@ -32,9 +44,13 @@ char	is_operator(char *input)
 	return (0);
 }
 
-char is_metachar(char *input)
+/**
+ * @brief Test if the character is a metacharacter
+ * 
+ * @param input: The user input
+ * @return 1 when it is a metacharacter, 0 when not
+ */
+uint8_t	is_metachar(char *input)
 {
-	if (is_space(*input))
-		return (1);
-	return (is_operator(input));
+	return (is_operator(input) || is_space(*input));
 }
