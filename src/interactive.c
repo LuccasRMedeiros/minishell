@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   interactive.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 20:12:16 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/15 15:14:38 by vgoncalv         ###   ########.fr       */
-/*                                                                            */
+/*																			  */
+/*														  :::	   ::::::::   */
+/*	 interface.c										:+:		 :+:	:+:   */
+/*													  +:+ +:+		  +:+	  */
+/*	 By: vgoncalv <vgoncalv@student.42sp.org.br>	+#+  +:+	   +#+		  */
+/*												  +#+#+#+#+#+	+#+			  */
+/*	 Created: 2022/01/27 20:12:16 by vgoncalv		   #+#	  #+#			  */
+/*   Updated: 2022/03/14 19:09:30 by vgoncalv         ###   ########.fr       */
+/*																			  */
 /* ************************************************************************** */
 
 #include <minishell.h>
@@ -30,16 +30,16 @@ static char	validate(char *input)
 	return (0);
 }
 
-void	interactive(void)
+void	interactive()
 {
 	char	*input;
 
-	input = prompt();
+	input = prompt(g_sh);
 	if (validate(input))
 	{
 		safe_free((void **)&input);
 		return ;
 	}
 	safe_free((void **)&input);
-	interactive();
+	interactive(input);
 }

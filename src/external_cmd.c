@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:19:05 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/15 15:15:07 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:59:17 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	sub_process(t_token *tokens, t_shell *sh)
 void	exec_extcmd(t_token *tokens)
 {
 	int		wstatus;
-	pid_t	new_pid;
+	pid_t   new_pid;
 
 	new_pid = fork();
 	if (!new_pid)

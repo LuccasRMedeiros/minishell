@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/15 15:08:55 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:21:20 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_shell	*g_sh;
 /**
  * @brief Initializes the Shell
  */
-static void	init_shell(void)
+static void init_shell(void)
 {
 	g_sh = ft_calloc(1, sizeof(t_shell));
 	parse_env();
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 	(void)argc;
 	(void)argv;
 	init_shell();
-	interactive();
-	free_sh();
+	interactive(NULL);
+	free_sh(g_sh);
 	return (EXIT_SUCCESS);
 }

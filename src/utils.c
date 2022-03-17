@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 22:05:03 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/15 14:37:19 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:58:49 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**gen_argv(t_token *tokens)
 static size_t	env_size(t_env *env)
 {
 	size_t	size;
-
+	
 	size = 0;
 	while (env)
 	{

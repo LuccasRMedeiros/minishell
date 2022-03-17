@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/15 14:38:29 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/14 18:40:09 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ extern t_shell	*g_sh;
 /**
  * @brief Launches the shell in interactive mode
  */
-void	interactive(void);
+void	interactive();
 
 /**
  * @brief Finalizes the shell
  */
-void	free_sh(void);
+void	free_sh();
 
 /**
  * @brief Finilizes the shell and exits with EXIT_FAILURE
  */
-void	error(void);
+void	error();
 
 #endif
