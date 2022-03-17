@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:19:40 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 13:47:31 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:05:26 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ char	*operator(char *input, size_t *offset)
 	value = ft_substr(input, *offset, len);
 	if (value == NULL)
 		return (NULL);
-	*offset += len - 1;
+	*offset += len;
 	return (value);
 }

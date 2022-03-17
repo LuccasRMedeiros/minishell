@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:56:32 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 13:39:06 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:57:11 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ uint8_t	is_space(char c)
 uint8_t	is_operator(char *input)
 {
 	if (*input == '|')
+		return (1);
+	if (*input == '<')
+		return (1);
+	if (*input == '>')
 		return (1);
 	if (ft_strncmp("&&", input, 2) == 0)
 		return (1);

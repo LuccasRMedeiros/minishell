@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:47:28 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 13:42:14 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:04:44 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ char	*word(char *input, size_t *offset)
 	word = ft_substr(input, *offset, len);
 	if (word == NULL)
 		return (NULL);
-	*offset += len;
+	*offset += len + (quote != 0);
 	return (word);
 }

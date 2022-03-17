@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:33:15 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 13:48:41 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:03:36 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ t_token	*tokenize(char *input)
 		token->value = token_value(type, input, &offset);
 		if (start == NULL)
 			start = token;
-		if (input[offset] != '\0')
-			offset++;
 	}
 	return (start);
 }
