@@ -6,7 +6,7 @@
 /*	 By: vgoncalv <vgoncalv@student.42sp.org.br>	+#+  +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2022/01/27 20:12:16 by vgoncalv		   #+#	  #+#			  */
-/*   Updated: 2022/03/16 00:41:36 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/16 00:57:50 by lrocigno         ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static uint8_t	validate(char *input)
 }
 
 /**
- * @brief Print the prompt and receive input from the user
+ * @brief Launches the shell in interactive mode
  */
 void	interactive(void)
 {

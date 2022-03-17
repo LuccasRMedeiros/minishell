@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/14 18:40:09 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/16 00:59:03 by lrocigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,16 @@ typedef struct s_shell
 
 extern t_shell	*g_sh;
 
-/**
- * @brief Launches the shell in interactive mode
- */
-void	interactive();
+void	interactive(void);
 
 /**
  * @brief Finalizes the shell
  */
-void	free_sh();
+void	free_sh(void);
 
 /**
  * @brief Finilizes the shell and exits with EXIT_FAILURE
  */
-void	error();
+void	error(void);
 
 #endif

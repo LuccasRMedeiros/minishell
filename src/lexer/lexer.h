@@ -17,9 +17,9 @@
 
 typedef enum e_token_type
 {
-  T_WORD,
-  T_OPERATOR,
-  TOKEN_COUNT,
+	T_WORD,
+	T_OPERATOR,
+	TOKEN_COUNT,
 }	t_token_type;
 
 typedef struct s_token

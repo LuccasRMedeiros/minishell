@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:47:25 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 15:07:10 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:09:34 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 extern char	**environ;
 
-char	*prompt()
+char	*prompt(void)
 {
 	char	*prompt;
 	char	*input;
 	char	*pwd;
 
-	pwd = get_pwd(g_sh);
+	pwd = get_pwd();
 	if (ft_asprintf(&prompt, "%s%s@%s%s:%s%s%s$ ",
 			BOLD_GREEN,
 			g_sh->user->value,
