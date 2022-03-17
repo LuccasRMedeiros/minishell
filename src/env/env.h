@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:24:48 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 15:03:00 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:48:55 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /**
  * Parses the environment variables
  */
-void	parse_env();
+void	parse_env(void);
 
 /**
  * Retrievies an environment variable as a t_env *

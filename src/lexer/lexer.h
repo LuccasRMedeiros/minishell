@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/14 18:51:08 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:46:14 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 
 typedef enum e_token_type
 {
-  T_WORD,
-  T_OPERATOR,
-  TOKEN_COUNT,
+	T_WORD,
+	T_OPERATOR,
+	TOKEN_COUNT,
 }	t_token_type;
 
 typedef struct s_token
 {
 	t_token_type	type;
 	const char		*value;
-    struct s_token	*prev;
-    struct s_token	*next;
+	struct s_token	*prev;
+	struct s_token	*next;
 }	t_token;
 
 /**
@@ -54,7 +54,7 @@ t_token	*clear_tokens(t_token *token);
  * @param c: the evaluated character
  * @return: a non-zero value if it is a space, tab or new line
  */
-char	is_space(char c);
+uint8_t	is_space(char c);
 
 /**
  * @brief: Evaluates if input is operator
@@ -62,7 +62,7 @@ char	is_space(char c);
  * @param input: the evaluated input
  * @return: a non-zero value if it is a operator
  */
-char	is_operator(char *input);
+uint8_t	is_operator(char *input);
 
 /**
  * @brief: Evaluates if input is metacharacter
@@ -70,7 +70,7 @@ char	is_operator(char *input);
  * @param input: the evaluated input
  * @return: a non-zero value if it is a metacharacter
  */
-char	is_metachar(char *input);
+uint8_t	is_metachar(char *input);
 
 /**
  * @brief: Gets word from current input and updates the offset
@@ -89,7 +89,6 @@ char	*word(char *input, size_t *offset);
  * @return: the operator value
  */
 char	*operator(char *input, size_t *offset);
-
 
 /**
  * @brief: Tokenizes the input into WORDs and OPERATORS

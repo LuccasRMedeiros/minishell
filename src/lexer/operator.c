@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:19:40 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 18:23:33 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:47:31 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*operator(char *input, size_t *offset)
 {
-    size_t		len;
-    char		operator;
-    char		*value;
-    const char	*start;
+	size_t		len;
+	char		operator;
+	char		*value;
+	const char	*start;
 
 	len = 1;
 	start = input + (*offset);

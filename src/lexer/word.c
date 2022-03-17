@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:47:28 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 19:07:51 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:42:14 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ static char	quoted_word(char *start)
 	return (quote);
 }
 
+/**
+ * @brief: Calculate the size of a word
+ *
+ * @param input: The user input
+ * @param quote: A quote char
+ * @return the calculated size
+ */
 static size_t	wordlen(char *input, char quote)
 {
 	size_t	len;

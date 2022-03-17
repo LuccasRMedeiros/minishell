@@ -6,13 +6,13 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:56:32 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 18:54:19 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:39:06 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
 
-char	is_space(char c)
+uint8_t	is_space(char c)
 {
 	if (c == ' ')
 		return (1);
@@ -23,7 +23,7 @@ char	is_space(char c)
 	return (0);
 }
 
-char	is_operator(char *input)
+uint8_t	is_operator(char *input)
 {
 	if (*input == '|')
 		return (1);
@@ -32,7 +32,7 @@ char	is_operator(char *input)
 	return (0);
 }
 
-char is_metachar(char *input)
+uint8_t	is_metachar(char *input)
 {
 	if (is_space(*input))
 		return (1);

@@ -6,16 +6,30 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 10:50:14 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/14 15:56:23 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:52:43 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <env/env.h>
 
+static void	insert_env(t_env *res)
+{
+	t_env	*env;
+
+	env = g_sh->env;
+	if (env == NULL)
+		g_sh->env = res;
+	else
+	{
+		while (env->next != NULL)
+			env = env->next;
+		env->next = res;
+	}
+}
+
 static t_env	*safe_get_env(const char *name)
 {
 	t_env	*res;
-	t_env	*env;
 
 	res = get_env(name);
 	if (res == NULL)
@@ -28,17 +42,10 @@ static t_env	*safe_get_env(const char *name)
 			safe_free((void **)&res);
 			return (NULL);
 		}
-		env = g_sh->env;
-		if (env == NULL)
-			g_sh->env = res;
-		else
-		{
-			while (env->next != NULL)
-				env = env->next;
-			env->next = res;
-		}
+		insert_env(res);
 	}
-	safe_free((void **)&(res->value));
+	else
+		safe_free((void **)&(res->value));
 	return (res);
 }
 
