@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:33:15 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 19:04:15 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:47:02 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,16 @@ static t_token	*unexpected_error(t_token *start, char *input, size_t offset)
 
 	token_value = word(input, &offset);
 	ft_asprintf(&(g_sh->error_msg), "minishell: unexpected error near %s\n",
-			   token_value);
+		token_value);
 	clear_tokens(start);
 	return (NULL);
+}
+
+static t_token	*set_start(t_token *start, t_token *token)
+{
+	if (start != NULL)
+		return (start);
+	return (token);
 }
 
 t_token	*tokenize(char *input)
@@ -65,8 +72,7 @@ t_token	*tokenize(char *input)
 		token = heredocs(token, input, &offset);
 		if (token == NULL)
 			return (clear_tokens(start));
-		if (start == NULL)
-			start = token;
+		start = set_start(start, token);
 	}
 	return (start);
 }

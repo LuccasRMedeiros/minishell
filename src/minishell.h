@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/17 19:10:36 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:47:45 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_shell
 	t_env		*pwd;
 	t_env		*old_pwd;
 	char		*error_msg;
-	uint8_t	exit_code;
+	uint8_t		exit_code;
 }	t_shell;
 
 extern t_shell	*g_sh;

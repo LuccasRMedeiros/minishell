@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/17 17:27:05 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:48:57 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_token
  * @param prev: the previous token in the list
  * @return: the new token
  */
-t_token	*new_token(t_token_type type, t_token *prev);
+t_token			*new_token(t_token_type type, t_token *prev);
 
 /**
  * @brief: Clears the tokens list
@@ -46,7 +46,7 @@ t_token	*new_token(t_token_type type, t_token *prev);
  * @param token: the head of the token list
  * @return: always returns NULL
  */
-t_token	*clear_tokens(t_token *token);
+t_token			*clear_tokens(t_token *token);
 
 /**
  * @brief Define the token type
@@ -62,7 +62,7 @@ t_token_type	token_type(char *input);
  * @param c: the evaluated character
  * @return: a non-zero value if it is a space, tab or new line
  */
-uint8_t	is_space(char c);
+uint8_t			is_space(char c);
 
 /**
  * @brief: Evaluates if input is operator
@@ -70,7 +70,7 @@ uint8_t	is_space(char c);
  * @param input: the evaluated input
  * @return: a non-zero value if it is a operator
  */
-uint8_t	is_operator(char *input);
+uint8_t			is_operator(char *input);
 
 /**
  * @brief: Evaluates if input is metacharacter
@@ -78,7 +78,7 @@ uint8_t	is_operator(char *input);
  * @param input: the evaluated input
  * @return: a non-zero value if it is a metacharacter
  */
-uint8_t	is_metachar(char *input);
+uint8_t			is_metachar(char *input);
 
 /**
  * @brief: Gets word from current input and updates the offset
@@ -87,7 +87,7 @@ uint8_t	is_metachar(char *input);
  * @param offset
  * @return: the word value
  */
-char	*word(char *input, size_t *offset);
+char			*word(char *input, size_t *offset);
 
 /**
  * @brief: Gets operator from current input and updates the offset
@@ -96,7 +96,7 @@ char	*word(char *input, size_t *offset);
  * @param offset
  * @return: the operator value
  */
-char	*operator(char *input, size_t *offset);
+char			*operator(char *input, size_t *offset);
 
 /**
  * @brief: Tokenizes the input into WORDs and OPERATORS
@@ -104,8 +104,7 @@ char	*operator(char *input, size_t *offset);
  * @param input
  * @return: the tokens list
  */
-t_token	*tokenize(char *input);
-
+t_token			*tokenize(char *input);
 
 /**
  * @brief: Handles unfinished here-docs
@@ -115,6 +114,6 @@ t_token	*tokenize(char *input);
  * @param offset
  * @return: the tokens list
  */
-t_token	*heredocs(t_token *token, char *input, size_t *offset);
+t_token			*heredocs(t_token *token, char *input, size_t *offset);
 
 #endif
