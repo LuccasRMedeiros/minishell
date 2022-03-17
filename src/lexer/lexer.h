@@ -26,26 +26,11 @@ typedef struct s_token
 {
 	t_token_type	type;
 	const char		*value;
-	struct s_token	*prev;
-	struct s_token	*next;
+    struct s_token	*prev;
+    struct s_token	*next;
 }	t_token;
 
-/**
- * @brief Creates a new token
- *
- * @see: struct s_token
- * @param type: the type of the created token
- * @param prev: the previous token in the list
- * @return: the new token
- */
 t_token	*new_token(t_token_type type, t_token *prev);
-
-/**
- * @brief: Clears the tokens list
- *
- * @param token: the head of the token list
- * @return: always returns NULL
- */
 t_token	*clear_tokens(t_token *token);
 
 /**
@@ -80,22 +65,7 @@ uint8_t	is_metachar(char *input);
  * @return: the word value
  */
 char	*word(char *input, size_t *offset);
-
-/**
- * @brief: Gets operator from current input and updates the offset
- *
- * @param input
- * @param offset
- * @return: the operator value
- */
 char	*operator(char *input, size_t *offset);
-
-/**
- * @brief: Tokenizes the input into WORDs and OPERATORS
- *
- * @param input
- * @return: the tokens list
- */
 t_token	*tokenize(char *input);
 
 #endif

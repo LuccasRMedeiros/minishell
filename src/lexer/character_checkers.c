@@ -38,7 +38,5 @@ uint8_t	is_operator(char *input)
 
 uint8_t	is_metachar(char *input)
 {
-	if (is_space(*input))
-		return (1);
-	return (is_operator(input));
+	return (is_operator(input) || is_space(*input));
 }

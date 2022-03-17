@@ -15,6 +15,7 @@
 /**
  * @brief: Checks if a word is surrounded by quotes
  *
+ * @param start: The begining of the search on the string
  * @return: the surrounding quote character
  */
 static char	quoted_word(char *start)
@@ -61,6 +62,13 @@ static size_t	wordlen(char *input, char quote)
 	return (len);
 }
 
+/**
+ * @brief: Gets word from current input and updates the offset
+ *
+ * @param input
+ * @param offset
+ * @return: the word value
+ */
 char	*word(char *input, size_t *offset)
 {
 	size_t	len;

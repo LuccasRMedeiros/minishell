@@ -48,9 +48,6 @@ typedef struct s_shell
 
 extern t_shell	*g_sh;
 
-/**
- * @brief Launches the shell in interactive mode
- */
 void	interactive(void);
 
 /**

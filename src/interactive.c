@@ -1,6 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::	   ::::::::   */
 /*   interactive.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
@@ -20,7 +20,7 @@
  * @param input: The user input
  * @return 1 if the input is a valid command, 0 if not.
  */
-static char	validate(char *input)
+static uint8_t	validate(char *input)
 {
 	t_token	*token;
 
@@ -36,11 +36,14 @@ static char	validate(char *input)
 	return (0);
 }
 
+/**
+ * @brief Launches the shell in interactive mode
+ */
 void	interactive(void)
 {
 	char	*input;
 
-	input = prompt();
+	input = prompt(g_sh);
 	if (validate(input))
 	{
 		safe_free((void **)&input);

@@ -12,13 +12,27 @@
 
 #include <lexer/lexer.h>
 
-static t_token_type	get_type(char *input)
+/**
+ * @brief Define the token type
+ *
+ * @param input: The user input
+ * @return the token type
+ */
+static t_token_type get_type(char *input)
 {
-	if ((is_operator(input) != 0))
-		return (T_OPERATOR);
-	return (T_WORD);
+  if ((is_operator(input) != 0))
+	return (T_OPERATOR);
+  return (T_WORD);
 }
 
+/**
+ * @brief Return the value for the token
+ *
+ * @param type: The token type
+ * @param input: The user input
+ * @param offset: Where the tokenization begins
+ * @return the value of the token
+ */
 static char	*token_value(t_token_type type, char *input, size_t *offset)
 {
 	if (type == T_WORD)
@@ -28,12 +42,18 @@ static char	*token_value(t_token_type type, char *input, size_t *offset)
 	return (NULL);
 }
 
+/**
+ * @brief Tokenizes the input into WORDs and OPERATORS
+ *
+ * @param input
+ * @return: the tokens list
+ */
 t_token	*tokenize(char *input)
 {
 	size_t			offset;
 	t_token_type	type;
-	t_token			*start;
-	t_token			*token;
+	t_token		*start;
+	t_token		*token;
 
 	offset = 0;
 	start = NULL;
