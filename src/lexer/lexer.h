@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/17 14:16:19 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:27:05 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ t_token	*new_token(t_token_type type, t_token *prev);
  * @return: always returns NULL
  */
 t_token	*clear_tokens(t_token *token);
+
+/**
+ * @brief Define the token type
+ *
+ * @param input: The user input
+ * @return the token type
+ */
+t_token_type	token_type(char *input);
 
 /**
  * @brief: Evaluates if character is space, tab or new line
@@ -97,5 +105,16 @@ char	*operator(char *input, size_t *offset);
  * @return: the tokens list
  */
 t_token	*tokenize(char *input);
+
+
+/**
+ * @brief: Handles unfinished here-docs
+ *
+ * @param token
+ * @param input
+ * @param offset
+ * @return: the tokens list
+ */
+t_token	*heredocs(t_token *token, char *input, size_t *offset);
 
 #endif

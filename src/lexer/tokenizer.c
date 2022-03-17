@@ -6,24 +6,12 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:33:15 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 14:18:47 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:04:15 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
-
-/**
- * @brief Define the token type
- *
- * @param input: The user input
- * @return the token type
- */
-static t_token_type	get_type(char *input)
-{
-	if ((is_operator(input) != 0))
-		return (T_OPERATOR);
-	return (T_WORD);
-}
+#include <unistd.h>
 
 /**
  * @brief Return the value for the token
@@ -42,6 +30,17 @@ static char	*token_value(t_token_type type, char *input, size_t *offset)
 	return (NULL);
 }
 
+static t_token	*unexpected_error(t_token *start, char *input, size_t offset)
+{
+	char	*token_value;
+
+	token_value = word(input, &offset);
+	ft_asprintf(&(g_sh->error_msg), "minishell: unexpected error near %s\n",
+			   token_value);
+	clear_tokens(start);
+	return (NULL);
+}
+
 t_token	*tokenize(char *input)
 {
 	size_t			offset;
@@ -56,11 +55,16 @@ t_token	*tokenize(char *input)
 	{
 		if ((is_space(input[offset]) != 0) && ++offset)
 			continue ;
-		type = get_type(input + offset);
+		type = token_type(input + offset);
 		token = new_token(type, token);
 		if (token == NULL)
-			return (clear_tokens(start));
+			return (unexpected_error(start, input, offset));
 		token->value = token_value(type, input, &offset);
+		if (token->value == NULL)
+			return (unexpected_error(start, input, offset));
+		token = heredocs(token, input, &offset);
+		if (token == NULL)
+			return (clear_tokens(start));
 		if (start == NULL)
 			start = token;
 	}
