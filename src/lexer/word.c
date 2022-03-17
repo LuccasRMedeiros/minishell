@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:47:28 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 14:04:44 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:19:02 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,6 @@ static size_t	wordlen(char *input, char quote)
 	return (len);
 }
 
-/**
- * @brief: Gets word from current input and updates the offset
- *
- * @param input
- * @param offset
- * @return: the word value
- */
 char	*word(char *input, size_t *offset)
 {
 	size_t	len;

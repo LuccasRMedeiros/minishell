@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:33:15 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 14:03:36 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:18:47 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
  * @param input: The user input
  * @return the token type
  */
-static t_token_type get_type(char *input)
+static t_token_type	get_type(char *input)
 {
-  if ((is_operator(input) != 0))
-	return (T_OPERATOR);
-  return (T_WORD);
+	if ((is_operator(input) != 0))
+		return (T_OPERATOR);
+	return (T_WORD);
 }
 
 /**
@@ -42,18 +42,12 @@ static char	*token_value(t_token_type type, char *input, size_t *offset)
 	return (NULL);
 }
 
-/**
- * @brief Tokenizes the input into WORDs and OPERATORS
- *
- * @param input
- * @return: the tokens list
- */
 t_token	*tokenize(char *input)
 {
 	size_t			offset;
 	t_token_type	type;
-	t_token		*start;
-	t_token		*token;
+	t_token			*start;
+	t_token			*token;
 
 	offset = 0;
 	start = NULL;
