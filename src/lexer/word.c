@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:47:28 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 08:43:22 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/18 08:48:45 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static size_t	wordlen(char *input, char quote)
 	first_quote = (quote != 0);
 	while (*input != '\0')
 	{
-		if (quote == 0 && is_metachar(input))
+		if (quote == 0 && is_metachar(*input))
 			break ;
 		len++;
 		if (quote != 0 && *input == quote)

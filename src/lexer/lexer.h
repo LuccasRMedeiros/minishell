@@ -6,7 +6,7 @@
 /*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 22:44:27 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/17 19:48:57 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/18 08:47:38 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,20 @@ t_token_type	token_type(char *input);
 uint8_t			is_space(char c);
 
 /**
- * @brief: Evaluates if input is operator
+ * @brief: Evaluates if character is operator
  *
- * @param input: the evaluated input
+ * @param c: the evaluated character
  * @return: a non-zero value if it is a operator
  */
-uint8_t			is_operator(char *input);
+uint8_t			is_operator(char c);
 
 /**
- * @brief: Evaluates if input is metacharacter
+ * @brief: Evaluates if character is metacharacter
  *
- * @param input: the evaluated input
+ * @param c: the evaluated character
  * @return: a non-zero value if it is a metacharacter
  */
-uint8_t			is_metachar(char *input);
+uint8_t			is_metachar(char c);
 
 /**
  * @brief: Gets word from current input and updates the offset
