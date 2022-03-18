@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:54:28 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 08:25:10 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/18 08:43:59 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <readline/readline.h>
 #include <unistd.h>
 
-static uint8_t  is_unquoted(const char *delimiter)
+static uint8_t	is_unquoted(const char *delimiter)
 {
-	size_t len;
+	size_t	len;
 
 	if (delimiter[0] != '"' && delimiter[0] != '\'')
 		return (1);
@@ -36,7 +36,7 @@ static uint8_t	is_delimiter(char *input, const char *delimiter)
 		input_len = ft_strlen(input);
 		delimiter_len = ft_strlen(delimiter) - 2;
 		return ((input_len == delimiter_len)
-				&& (ft_strncmp(input, delimiter + 1, delimiter_len) == 0));
+			&& (ft_strncmp(input, delimiter + 1, delimiter_len) == 0));
 	}
 	return ((ft_strcmp(input, delimiter) == 0));
 }

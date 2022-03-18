@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:47:28 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 07:47:17 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/18 08:43:22 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	quoted_word(char *start)
 static size_t	wordlen(char *input, char quote)
 {
 	size_t		len;
-	uint8_t	first_quote;
+	uint8_t		first_quote;
 
 	len = 0;
 	first_quote = (quote != 0);
