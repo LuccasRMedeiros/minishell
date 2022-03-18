@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:33:15 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/17 19:47:02 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/18 08:59:48 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,23 @@
 /**
  * @brief Return the value for the token
  *
- * @param type: The token type
+ * @param token: The token
  * @param input: The user input
  * @param offset: Where the tokenization begins
  * @return the value of the token
  */
-static char	*token_value(t_token_type type, char *input, size_t *offset)
+static char	*token_value(t_token *token, char *input, size_t *offset)
 {
-	if (type == T_WORD)
-		return (word(input, offset));
-	if (type == T_OPERATOR)
-		return (operator(input, offset));
-	return (NULL);
+	char	*value;
+
+	if (token->type == T_OPERATOR)
+	{
+		value = operator(input, offset);
+		if ((ft_strcmp(value, "&") == 0))
+			token->type = T_WORD;
+		return (value);
+	}
+	return (word(input, offset));
 }
 
 static t_token	*unexpected_error(t_token *start, char *input, size_t offset)
@@ -66,7 +71,7 @@ t_token	*tokenize(char *input)
 		token = new_token(type, token);
 		if (token == NULL)
 			return (unexpected_error(start, input, offset));
-		token->value = token_value(type, input, &offset);
+		token->value = token_value(token, input, &offset);
 		if (token->value == NULL)
 			return (unexpected_error(start, input, offset));
 		token = heredocs(token, input, &offset);
