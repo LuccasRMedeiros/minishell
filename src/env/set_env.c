@@ -6,50 +6,46 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 10:50:14 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/15 15:08:23 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:52:43 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <env/env.h>
 
-static t_env	*new_env(const char *name)
+static void	insert_env(t_env *res)
 {
 	t_env	*env;
 
-	env = ft_calloc(1, sizeof(t_env));
+	env = g_sh->env;
 	if (env == NULL)
-		return (NULL);
-	env->name = ft_strdup(name);
-	if (env->name == NULL)
+		g_sh->env = res;
+	else
 	{
-		safe_free((void **)&(env->name));
-		safe_free((void **)&env);
+		while (env->next != NULL)
+			env = env->next;
+		env->next = res;
 	}
-	return (env);
 }
 
 static t_env	*safe_get_env(const char *name)
 {
 	t_env	*res;
-	t_env	*env;
 
 	res = get_env(name);
 	if (res == NULL)
 	{
-		res = new_env(name);
-		if (res == NULL)
-			return (NULL);
-		env = g_sh->env;
-		if (env == NULL)
-			g_sh->env = res;
-		else
+		res = ft_calloc(1, sizeof(t_env));
+		res->name = ft_strdup(name);
+		if (res->name == NULL)
 		{
-			while (env->next != NULL)
-				env = env->next;
-			env->next = res;
+			safe_free((void **)&(res->name));
+			safe_free((void **)&res);
+			return (NULL);
 		}
+		insert_env(res);
 	}
-	safe_free((void **)&(res->value));
+	else
+		safe_free((void **)&(res->value));
 	return (res);
 }
 
