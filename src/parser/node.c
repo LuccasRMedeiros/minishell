@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:47:34 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 13:56:18 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/20 14:08:45 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_ast	*new_node(t_ast_type type)
 
 void	clear_node(t_ast	*node)
 {
+	if (node == NULL)
+		return ;
 	if (node->type == COMMAND)
 	{
 		safe_free((void **)&(node->internal.command->args));
