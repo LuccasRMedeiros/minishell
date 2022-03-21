@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 11:34:20 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 13:58:27 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/21 08:42:06 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief Gets the number of arguments in a command
  *
  * @see t_command
- * @param token: the starting token
+ * @param token: The starting token
  */
 static	size_t	argslen(t_token *token)
 {
@@ -34,10 +34,10 @@ static	size_t	argslen(t_token *token)
 }
 
 /**
- * @brief Parses a command and updates the AST accordingly
+ * @brief Parses a command
  *
- * @param token: the starting token to be parsed
- * @return: the AST root node
+ * @param token: The starting token to be parsed
+ * @return: The parsed command node
  */
 t_ast	*parse_command(t_token **token)
 {
