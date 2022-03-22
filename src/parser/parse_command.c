@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 11:34:20 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/21 08:42:06 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/22 11:47:33 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_ast	*parse_command(t_token **token)
 	if (command == NULL)
 		return (NULL);
 	argc = argslen(*token);
-	command->internal.command->args = ft_calloc(1, (argc + 1) * sizeof(char *));
+	command->internal.command->args = ft_calloc(argc + 1, sizeof(char *));
 	if (command->internal.command->args == NULL)
 		return (parser_error(command, NULL));
 	count = 0;

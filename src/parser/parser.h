@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:37:02 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 14:01:30 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/21 08:46:39 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	clear_node(t_ast	*node);
 t_ast	*parser_error(t_ast *node, t_token *token);
 
 t_ast	*parse_command(t_token **token);
+
+t_ast	*parse_operator(t_token **token);
 
 t_ast	*build_ast(t_token *token);
 

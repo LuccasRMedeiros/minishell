@@ -6,7 +6,7 @@
 #    By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#              #
-#    Updated: 2022/03/20 13:30:23 by vgoncalv         ###   ########.fr        #
+#    Updated: 2022/03/22 11:17:25 by vgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC :=	minishell.c get_pwd.c prompt.c interactive.c \
 		free.c error.c parse.c get_env.c set_env.c \
 		character_checkers.c token.c word.c operator.c \
 		tokenizer.c heredocs.c node.c parser_error.c \
-		parse_command.c parser.c
+		parse_command.c parse_operator.c parser.c
 
 OBJ_PATH = ./build
 OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))

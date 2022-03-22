@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:47:34 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 14:08:45 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/22 11:19:24 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_ast	*new_node(t_ast_type type)
 {
 	t_ast		*node;
 
+	if (type == AST_COUNT)
+		return (NULL);
 	node = ft_calloc(1, sizeof(t_ast));
 	if (node == NULL)
 		return (NULL);
