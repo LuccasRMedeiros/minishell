@@ -62,12 +62,6 @@ void	free_sh(void);
  */
 void	error(void);
 
-/**
- * @brief Execute the built-in command asked by the user.
- *
- * @param tokens: The tokens generated from the user input.
- * @param sh: The shell.
- */
-void	builtin_cmd(t_token *tks, t_shell *sh);
+void	builtin_cmd(void);
 
 #endif

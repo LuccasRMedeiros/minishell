@@ -65,7 +65,7 @@ t_token	*tokenize(char *input)
 	token = NULL;
 	while (input[offset] != '\0')
 	{
-		if ((is_space(input[offset]) != 0) && ++offset)
+		if (is_space(input[offset]) && ++offset)
 			continue ;
 		type = token_type(input + offset);
 		token = new_token(type, token);

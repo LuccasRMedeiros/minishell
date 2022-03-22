@@ -12,9 +12,12 @@
 
 #include <minishell.h>
 
-void	builtin_cmd(t_token *tks, t_shell *sh)
+/**
+ * @brief Execute the built-in command asked by the user.
+ *
+ * @param tokens: The tokens generated from the user input.
+ * @param sh: The shell.
+ */
+void	builtin_cmd(void)
 {
-	if (ft_strncmp(tks->value, "cd", ft_strlen(tks->value)) == 0)
-		cd((char *)tks->next->value);
-	if (sh) {}
 }
