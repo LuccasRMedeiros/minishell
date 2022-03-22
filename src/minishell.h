@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:44:26 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/02 17:26:30 by lrocigno         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:47:45 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <ft_printf.h>
 # include <stdio.h>
 # include <sys/wait.h>
-# include <lexer/lexer.h>
-# include <builtin/builtin.h>
 
 /**
  * @brief Hold the environment variables separatelly
@@ -40,71 +38,29 @@ typedef struct s_env
  */
 typedef struct s_shell
 {
-	t_env	*env;
-	t_env	*user;
-	t_env	*host;
-	t_env	*home;
-	t_env	*pwd;
-	t_env	*old_pwd;
+	t_env		*env;
+	t_env		*user;
+	t_env		*host;
+	t_env		*home;
+	t_env		*pwd;
+	t_env		*old_pwd;
+	char		*error_msg;
+	uint8_t		exit_code;
 }	t_shell;
 
-/**
- * @brief Receive the user input, parse, execute (if it is a valid command) and 
- * stores in the history (when it isn't a empty line).
- * 
- * @param input: empty string,
- * @param sh: the shell
- */
-void	interface(char *input, t_shell *sh);
+extern t_shell	*g_sh;
+
+void	interactive(void);
 
 /**
  * @brief Finalizes the shell
- * 
- * @param sh: the shell
  */
-void	free_sh(t_shell *sh);
+void	free_sh(void);
 
 /**
  * @brief Finilizes the shell and exits with EXIT_FAILURE
- * 
- * @param sh: the shell
  */
-void	error(t_shell *sh);
-
-/**
- * @brief Search for name in env variables and return its value
- * 
- * @param name: The env name.
- * @param sh: The shell.
- * @return the value of the asked environ variable.
- */
-char	*get_env_value(const char *name, t_shell *sh);
-
-/**
- * @brief Generate the argv array
- * 
- * @param full_name: The full name of the program.
- * @param tokens: The tokens aquired after the user input.
- * @return the arguments array
- */
-char	**gen_argv(t_token *tokens);
-
-/**
- * @brief Generate the envp array
- * 
- * @param env: the environ linked list
- * @return the environ array
- */
-char	**gen_envp(t_env *env);
-
-/**
- * @brief Execute the command asked by the user (when it is a external command
- * or program).
- *
- * @param tokens: The tokens generated from the user input.
- * @param sh: The shell
- */
-void	exec_extcmd(t_token *tokens, t_shell *sh);
+void	error(void);
 
 /**
  * @brief Execute the built-in command asked by the user.

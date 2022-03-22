@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:24:48 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 10:54:09 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:48:55 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,22 @@
 
 /**
  * Parses the environment variables
- * @param sh: the shell
  */
-void	parse_env(t_shell *sh);
+void	parse_env(void);
 
 /**
  * Retrievies an environment variable as a t_env *
  * @param name: the name of the environment variable
- * @param sh: the shell
  * @return the environment variable if it is set, otherwise it returns NULL
  */
-t_env	*get_env(const char *name, t_shell *sh);
+t_env	*get_env(const char *name);
 
 /**
  * Sets the value of a environment variable
  * @param name: the name of the environment variable
  * @param value: the value of the environment variable
- * @param sh: the shell
  * @return the environment variable set, or NULL if there was an error
  */
-t_env	*set_env(const char *name, char *value, t_shell *sh);
+t_env	*set_env(const char *name, char *value);
 
 #endif

@@ -6,32 +6,31 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 20:21:21 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/28 21:27:48 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:46:46 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	free_env(t_shell *sh)
+static void	free_env(void)
 {
 	t_env	*env;
 	t_env	*next;
 
-	env = sh->env;
+	env = g_sh->env;
 	while (env != NULL)
 	{
 		next = env->next;
-		if (env->name != NULL)
-			safe_free((void **)&env->name);
-		if (env->value != NULL)
-			safe_free((void **)&env->value);
-		free(env);
+		safe_free((void **)&env->name);
+		safe_free((void **)&env->value);
+		safe_free((void **)&env);
 		env = next;
 	}
+	g_sh->env = NULL;
 }
 
-void	free_sh(t_shell *sh)
+void	free_sh(void)
 {
-	free_env(sh);
-	ft_bzero(sh, sizeof(t_shell));
+	free_env();
+	safe_free((void **)g_sh);
 }

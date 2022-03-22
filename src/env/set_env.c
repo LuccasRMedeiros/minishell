@@ -6,46 +6,66 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 10:50:14 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 11:05:05 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:52:43 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <env/env.h>
 
-static char	get_name_and_value(const char **name, char **value)
-{
-	if (*value == NULL)
-		*value = ft_strdup("");
-	else
-		*value = ft_strdup(*value);
-	*name = ft_strdup(*name);
-	if (name == NULL || value == NULL)
-		return (1);
-	return (0);
-}
-
-t_env	*set_env(const char *name, char *value, t_shell *sh)
+static void	insert_env(t_env *res)
 {
 	t_env	*env;
-	t_env	*res;
 
-	if (get_name_and_value(&name, &value))
-		return (NULL);
-	res = get_env(name, sh);
-	if (res == NULL)
-		res = ft_calloc(1, sizeof(t_env));
-	if (res == NULL)
-		return (NULL);
-	res->name = name;
-	res->value = value;
-	if (sh->env == NULL)
-		sh->env = res;
+	env = g_sh->env;
+	if (env == NULL)
+		g_sh->env = res;
 	else
 	{
-		env = sh->env;
 		while (env->next != NULL)
 			env = env->next;
 		env->next = res;
 	}
+}
+
+static t_env	*safe_get_env(const char *name)
+{
+	t_env	*res;
+
+	res = get_env(name);
+	if (res == NULL)
+	{
+		res = ft_calloc(1, sizeof(t_env));
+		res->name = ft_strdup(name);
+		if (res->name == NULL)
+		{
+			safe_free((void **)&(res->name));
+			safe_free((void **)&res);
+			return (NULL);
+		}
+		insert_env(res);
+	}
+	else
+		safe_free((void **)&(res->value));
+	return (res);
+}
+
+t_env	*set_env(const char *name, char *value)
+{
+	t_env	*res;
+	char	*new_value;
+
+	if (value == NULL)
+		new_value = ft_strdup("");
+	else
+		new_value = ft_strdup(value);
+	if (new_value == NULL)
+		return (NULL);
+	res = safe_get_env(name);
+	if (res == NULL)
+	{
+		safe_free((void **)&new_value);
+		return (NULL);
+	}
+	res->value = new_value;
 	return (res);
 }

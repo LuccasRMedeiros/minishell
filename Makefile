@@ -6,41 +6,15 @@
 #    By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 10:49:54 by lrocigno          #+#    #+#              #
-#    Updated: 2022/03/02 17:02:46 by lrocigno         ###   ########.fr        #
+#    Updated: 2022/03/20 13:30:23 by vgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-define MINISHELL
-                                                         
-                                      .          
-                               .     .;          
-                               ; .   /.        ; 
-                               .\:   ,\      .;| 
-                               ;|\_.;|\;._   :|| 
-                              ,/;          :;//| 
-                            . -               ;| 
-                            :/                 \ 
-                            |                   |
-                            |                   |
-                            |                  :|
-                             \                ./ 
-                              -.     .:      .-  
-                                --._:/;:__.--    
-  __      __ ____ __   ____ ____   _______ ____ ____ _______  ____     ____    
-  \ \    / / \  / \ \  \  / \  /  / _____/ \  / \  / \  ____| \  /     \  /    
-   | \  / |   ||   | \  ||   ||   | \___    ||___||   ||__     ||       ||     
-   ||\\\//||   ||   ||\\\ ||   ||   \____ \   | ___ |   | __|    ||       ||     
-   || \/ ||   ||   || \\\||   ||   ____/ |   ||   ||   ||____   ||____   ||____ 
-  /__\  /__\ /__\ /__\ \__\ /__\ /______/  /__\ /__\ /______| /______| /______|
-                                
-endef
-export MINISHELL
-
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-SANITIZERS = -g3
+SANITIZERS = -g3 -fsanitize=address
 
 LIB_PATH = ./lib
 LIBFT_PATH = $(LIB_PATH)/libft
@@ -48,16 +22,15 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_FLAGS = -L./lib/libft -lft
 
 LIBS = $(LIBFT_FLAGS) -lreadline
-		
 INCLUDES = -I ./lib/libft/includes \
 		   -I ./src
 
-vpath %.c src src/env src/prompt src/lexer src/builtin
-SRC :=	minishell.c interface.c free.c builtin_cmd.c external_cmd.c utils.c \
-		get_pwd.c prompt.c \
-		error.c parse.c get_env.c set_env.c \
-		get_value.c get_type.c tokenizer.c tokens.c helpers.c quote.c \
-		cd.c \
+vpath %.c src src/env src/prompt src/lexer src/parser
+SRC :=	minishell.c get_pwd.c prompt.c interactive.c \
+		free.c error.c parse.c get_env.c set_env.c \
+		character_checkers.c token.c word.c operator.c \
+		tokenizer.c heredocs.c node.c parser_error.c \
+		parse_command.c parser.c
 
 OBJ_PATH = ./build
 OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))
@@ -65,7 +38,6 @@ OBJ := $(addprefix $(OBJ_PATH)/,$(SRC:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	echo "$$MINISHELL"
 	$(CC) $(CFLAGS) $(SANITIZERS) $(INCLUDES) $(OBJ) $(LIBS) -o $@
 
 $(OBJ_PATH)/%.o: %.c

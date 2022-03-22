@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 09:29:56 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 09:59:55 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:53:55 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@
  * ~/ (see: tilde-expansion)
  * @return the formated pwd
  */
-char	*get_pwd(t_shell *sh);
+char	*get_pwd(void);
 
 /**
  * Generates the shell prompt
  * @return the generated prompt
  */
-char	*prompt(t_shell *sh);
+char	*prompt(void);
 
 #endif

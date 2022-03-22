@@ -6,7 +6,7 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:33:11 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 11:07:19 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:49:43 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,52 +32,46 @@ static char	*value(const char *env)
 	return (ft_strdup(start + 1));
 }
 
-static void	set_default_envs(t_shell *sh)
+static void	set_default_envs(void)
 {
-	sh->user = get_env("USER", sh);
-	if (sh->user == NULL)
+	g_sh->user = get_env("USER");
+	if (g_sh->user == NULL)
 	{
-		sh->user = set_env("USER", "user", sh);
-		if (sh->user == NULL)
-			error(sh);
+		g_sh->user = set_env("USER", "user");
+		if (g_sh->user == NULL)
+			error();
 	}
-	sh->host = get_env("HOST", sh);
-	if (sh->host == NULL)
+	g_sh->host = get_env("HOST");
+	if (g_sh->host == NULL)
 	{
-		sh->host = set_env("HOST", "minishell", sh);
-		if (sh->host == NULL)
-			error(sh);
+		g_sh->host = set_env("HOST", "minishell");
+		if (g_sh->host == NULL)
+			error();
 	}
-	sh->home = get_env("HOME", sh);
-	sh->pwd = get_env("PWD", sh);
-	if (sh->pwd == NULL)
-		error(sh);
-	sh->old_pwd = sh->pwd;
+	g_sh->home = get_env("HOME");
+	g_sh->pwd = get_env("PWD");
+	if (g_sh->pwd == NULL)
+		error();
+	g_sh->old_pwd = g_sh->pwd;
 }
 
-void	parse_env(t_shell *sh)
+void	parse_env(void)
 {
 	size_t	i;
 	t_env	*env;
+	char	*e_name;
+	char	*e_value;
 
-	sh->env = ft_calloc(1, sizeof(t_env));
-	i = 0;
-	env = sh->env;
-	while (environ[i] != NULL)
+	i = -1;
+	while (environ[++i] != NULL)
 	{
-		env->name = name(environ[i]);
-		if (env->name == NULL)
-			error(sh);
-		env->value = value(environ[i]);
-		if (env->value == NULL)
-			error(sh);
-		if (environ[i + 1] == NULL)
-			break ;
-		env->next = ft_calloc(1, sizeof(t_env));
-		env = env->next;
+		e_name = name(environ[i]);
+		e_value = value(environ[i]);
+		env = set_env(e_name, e_value);
+		safe_free((void **)&e_name);
+		safe_free((void **)&e_value);
 		if (env == NULL)
-			error(sh);
-		i++;
+			error();
 	}
-	set_default_envs(sh);
+	set_default_envs();
 }

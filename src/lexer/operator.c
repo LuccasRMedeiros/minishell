@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/17 13:43:42 by vgoncalv         ###   ########.fr       */
+/*   Created: 2022/03/14 18:19:40 by vgoncalv          #+#    #+#             */
+/*   Updated: 2022/03/17 14:05:26 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <minishell.h>
-#include <env/env.h>
+#include <lexer/lexer.h>
 
-t_shell	*g_sh;
-
-/**
- * @brief Initializes the Shell
- */
-static void	init_shell(void)
+char	*operator(char *input, size_t *offset)
 {
-	g_sh = ft_calloc(1, sizeof(t_shell));
-	parse_env();
-}
+	size_t		len;
+	char		operator;
+	char		*value;
+	const char	*start;
 
-int	main(int argc, char *argv[])
-{
-	(void)argc;
-	(void)argv;
-	init_shell();
-	interactive();
-	free_sh();
-	return (EXIT_SUCCESS);
+	len = 1;
+	start = input + (*offset);
+	operator = *start;
+	if (operator == start[1])
+	{
+		len++;
+	}
+	value = ft_substr(input, *offset, len);
+	if (value == NULL)
+		return (NULL);
+	*offset += len;
+	return (value);
 }

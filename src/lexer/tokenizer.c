@@ -1,56 +1,83 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrocigno <lrocigno@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 13:49:35 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/02/28 10:47:06 by lrocigno         ###   ########.fr       */
+/*   Created: 2022/03/14 17:33:15 by vgoncalv          #+#    #+#             */
+/*   Updated: 2022/03/18 08:59:48 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer/lexer.h>
-#include <lexer/helpers.h>
+#include <unistd.h>
 
 /**
- * @brief Generate a token and return it. The subroutine exists to help to 
- * construct the list of tokens.
+ * @brief Return the value for the token
  *
- * @param order: The order the token appear on the list.
- * @param input: The pointer to the input string.
- * @return one node with one value accquired and its type.
+ * @param token: The token
+ * @param input: The user input
+ * @param offset: Where the tokenization begins
+ * @return the value of the token
  */
-static t_token	*generate_token(int order, char **input)
+static char	*token_value(t_token *token, char *input, size_t *offset)
 {
 	char	*value;
-	t_type	type;
 
-	value = get_value(input);
-	if (!value)
-		return (NULL);
-	type = get_type(order, value);
-	return (new_token(value, type));
+	if (token->type == T_OPERATOR)
+	{
+		value = operator(input, offset);
+		if ((ft_strcmp(value, "&") == 0))
+			token->type = T_WORD;
+		return (value);
+	}
+	return (word(input, offset));
 }
 
-t_token	*tokenizer(char *input)
+static t_token	*unexpected_error(t_token *start, char *input, size_t offset)
 {
-	t_token	*head;
-	t_token	*tokens;
-	int		order;
+	char	*token_value;
 
-	clear_quote();
-	head = NULL;
-	while (is_space(*input))
-		++input;
-	head = generate_token(0, &input);
-	tokens = head;
-	order = 1;
-	while (tokens)
+	token_value = word(input, &offset);
+	ft_asprintf(&(g_sh->error_msg), "minishell: unexpected error near %s\n",
+		token_value);
+	clear_tokens(start);
+	return (NULL);
+}
+
+static t_token	*set_start(t_token *start, t_token *token)
+{
+	if (start != NULL)
+		return (start);
+	return (token);
+}
+
+t_token	*tokenize(char *input)
+{
+	size_t			offset;
+	t_token_type	type;
+	t_token			*start;
+	t_token			*token;
+
+	offset = 0;
+	start = NULL;
+	token = NULL;
+	while (input[offset] != '\0')
 	{
-		tokens->next = generate_token(order, &input);
-		tokens = tokens->next;
-		++order;
+		if ((is_space(input[offset]) != 0) && ++offset)
+			continue ;
+		type = token_type(input + offset);
+		token = new_token(type, token);
+		if (token == NULL)
+			return (unexpected_error(start, input, offset));
+		token->value = token_value(token, input, &offset);
+		if (token->value == NULL)
+			return (unexpected_error(start, input, offset));
+		token = heredocs(token, input, &offset);
+		if (token == NULL)
+			return (clear_tokens(start));
+		start = set_start(start, token);
 	}
-	return (head);
+	return (start);
 }

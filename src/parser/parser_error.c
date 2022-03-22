@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:27:14 by lrocigno          #+#    #+#             */
-/*   Updated: 2022/03/17 13:43:42 by vgoncalv         ###   ########.fr       */
+/*   Created: 2022/03/20 12:23:46 by vgoncalv          #+#    #+#             */
+/*   Updated: 2022/03/20 12:30:55 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <minishell.h>
-#include <env/env.h>
+#include <parser/parser.h>
 
-t_shell	*g_sh;
-
-/**
- * @brief Initializes the Shell
- */
-static void	init_shell(void)
+t_ast	*parser_error(t_ast *node, t_token *token)
 {
-	g_sh = ft_calloc(1, sizeof(t_shell));
-	parse_env();
-}
+	char	*fmt;
 
-int	main(int argc, char *argv[])
-{
-	(void)argc;
-	(void)argv;
-	init_shell();
-	interactive();
-	free_sh();
-	return (EXIT_SUCCESS);
+	if (token != NULL)
+		fmt = "minishell: parsing error near '%s'\n";
+	else
+		fmt = "minishell: internal parsing error\n";
+	ft_dprintf(STDERR_FILENO, fmt, token->value);
+	if (node != NULL)
+		clear_node(node);
+	return (NULL);
 }
