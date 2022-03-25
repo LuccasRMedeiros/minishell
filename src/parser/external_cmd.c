@@ -60,10 +60,11 @@ static int	sub_process(t_command *command)
 	full_name = choose_path(command->cmd, get_env("PATH")->value);
 	if (!full_name)
 		exit(0);
-	envp = gen_envp(g_sh->env);
-	if (!argv || !envp)
-		exit(0);
-	execve(full_name, command->args, envp);
+	// envp = gen_envp(g_sh->env);
+	// if (!argv || !envp)
+	// 	exit(0);
+	argv = (char **)command->args;
+	execve(full_name, argv, __environ);
 	safe_free((void **)&argv);
 	safe_free((void **)&envp);
 	exit (1);

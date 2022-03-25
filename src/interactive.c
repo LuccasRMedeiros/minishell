@@ -34,7 +34,7 @@ static uint8_t	validate(char **input)
 	token = tokenize(*input);
 	ast = build_ast(token);
 	if (ast->type == COMMAND)
-		external_cmd(ast->internal.command);
+		exec_extcmd(ast->internal.command);
 	clear_ast(ast);
 	clear_tokens(token);
 	return (0);

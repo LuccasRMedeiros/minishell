@@ -62,4 +62,6 @@ t_ast	*build_ast(t_token *token);
 
 void	clear_ast(t_ast *ast);
 
+void	exec_extcmd(t_command *command);
+
 #endif
