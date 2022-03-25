@@ -14,6 +14,34 @@
 #include <env/env.h>
 
 /**
+ * @brief Create a argv array to send to execve
+ * 
+ * @param cmd: The command
+ * @param full_name: The full path with the name of the command
+ * @return The new argv 
+ */
+static char	**gen_argv(t_command *cmd, char *full_name)
+{
+	int new_argc;
+	char **new_argv;
+
+	new_argc = 0;
+	while (cmd->args[new_argc])
+		++new_argc;
+	new_argv = ft_calloc(new_argc + 1, sizeof (char *));
+	if (!new_argv)
+		return (NULL);
+	new_argv[new_argc] = NULL;
+	--new_argc;
+	while (new_argc)
+	{
+		new_argv[new_argc] = cmd->args[new_argc - 1];
+		--new_argc;
+	}
+	new_argv[0] = full_name;
+}
+
+/**
  * @brief Try access() the cmd through each path in environment, return the
  * sucessfull one with the name of the executable
  *

@@ -18,7 +18,7 @@
  * @see t_command
  * @param token: the starting token
  */
-static	size_t	argslen(t_token *token)
+static size_t	argslen(t_token *token)
 {
 	size_t	len;
 
