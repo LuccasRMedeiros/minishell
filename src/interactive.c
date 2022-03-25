@@ -33,6 +33,8 @@ static uint8_t	validate(char **input)
 	add_history(*input);
 	token = tokenize(*input);
 	ast = build_ast(token);
+	if (ast->type == COMMAND)
+		exec_extcmd(ast->internal.command);
 	clear_ast(ast);
 	clear_tokens(token);
 	return (0);
