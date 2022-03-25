@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <parser/parser.h>
+#include <env/env.h>
 
 /**
  * @brief Try access() the cmd through each path in environment, return the
@@ -50,33 +51,37 @@ static char	*choose_path(const char *cmd, char *syspath)
  * @param sh: The shell
  * @return the exit code from the new process
  */
-static int	sub_process(t_token *tokens, t_shell *sh)
+static int	sub_process(t_command *command)
 {
 	char	*full_name;
 	char	**argv;
 	char	**envp;
 
-	full_name = choose_path(tokens->value, get_env_value("PATH", sh));
+	full_name = choose_path(command->cmd, get_env("PATH")->value);
 	if (!full_name)
 		exit(0);
-	argv = gen_argv(tokens);
-	envp = gen_envp(sh->env);
+	envp = gen_envp(g_sh->env);
 	if (!argv || !envp)
 		exit(0);
-	execve(full_name, argv, envp);
+	execve(full_name, command->args, envp);
 	safe_free((void **)&argv);
 	safe_free((void **)&envp);
 	exit (1);
 }
 
-void	exec_extcmd(t_token *tokens, t_shell *sh)
+/**
+ * @brief Execute a external command
+ * 
+ * @param command: Structure with the command and its arguments
+ */
+void	exec_extcmd(t_command *command)
 {
 	int		wstatus;
 	pid_t   new_pid;
 
 	new_pid = fork();
 	if (!new_pid)
-		sub_process(tokens, sh);
+		sub_process(command);
 	else
 		wait(&wstatus);
 }

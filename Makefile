@@ -26,7 +26,7 @@ INCLUDES = -I ./lib/libft/includes \
 		   -I ./src
 
 vpath %.c src src/env src/prompt src/lexer src/parser
-SRC :=	minishell.c get_pwd.c prompt.c interactive.c \
+SRC :=	minishell.c get_pwd.c prompt.c interactive.c external_cmd.c\
 		free.c error.c parse.c get_env.c set_env.c \
 		character_checkers.c token.c word.c operator.c \
 		tokenizer.c heredocs.c node.c parser_error.c \
