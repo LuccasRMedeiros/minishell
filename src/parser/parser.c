@@ -6,37 +6,30 @@
 /*   By: vgoncalv <vgoncalv@student.42sp.o...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:26:57 by vgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/22 11:32:01 by vgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/28 16:18:36 by vgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser/parser.h>
 
-static t_ast	*insert_node(t_ast *ast, t_ast *node, t_token *token)
+static t_ast	*insert_node(t_ast *ast, t_ast *node)
 {
-	if (node == NULL)
-		return (parser_error(node, token));
 	if (node->type == COMMAND || node->type == BUILTIN)
 	{
 		if (ast == NULL)
 			return (node);
-		if (ast->type == COMMAND)
+		if (ast->type == COMMAND || ast->type == BUILTIN)
 		{
 			clear_ast(ast);
-			return (parser_error(node, token));
+			return (NULL);
 		}
 		ast->internal.child->right = node;
 		return (ast);
 	}
 	if (ast == NULL)
-		return (parser_error(node, token));
-	if (node->type == PIPE)
-	{
-		node->internal.child->left = ast;
-		return (node);
-	}
-	clear_node(node);
-	return (NULL);
+		return (NULL);
+	node->internal.child->left = ast;
+	return (node);
 }
 
 /**
@@ -47,20 +40,27 @@ static t_ast	*insert_node(t_ast *ast, t_ast *node, t_token *token)
  */
 t_ast	*build_ast(t_token *token)
 {
-	t_ast	*ast;
-	t_ast	*node;
+	t_ast		*ast;
+	t_ast		*node;
+	t_token		*ref;
 
 	ast = NULL;
 	node = NULL;
 	while (token != NULL)
 	{
+		ref = token;
 		if (token->type == T_WORD)
 			node = parse_command(&token);
 		else
 			node = parse_operator(&token);
-		ast = insert_node(ast, node, token);
-		if (ast == NULL)
+		if (node == NULL)
+		{
+			clear_ast(ast);
 			return (NULL);
+		}
+		ast = insert_node(ast, node);
+		if (ast == NULL)
+			return (parser_error(node, ref));
 	}
 	return (ast);
 }
