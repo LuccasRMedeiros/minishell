@@ -22,8 +22,8 @@
  */
 static char	**gen_argv(t_command *cmd, char *full_name)
 {
-	int new_argc;
-	char **new_argv;
+	int		new_argc;
+	char	**new_argv;
 
 	new_argc = 0;
 	while (cmd->args[new_argc])
@@ -35,10 +35,11 @@ static char	**gen_argv(t_command *cmd, char *full_name)
 	--new_argc;
 	while (new_argc)
 	{
-		new_argv[new_argc] = cmd->args[new_argc - 1];
+		new_argv[new_argc] = (char *)cmd->args[new_argc - 1];
 		--new_argc;
 	}
 	new_argv[0] = full_name;
+	return (new_argv);
 }
 
 /**
@@ -77,24 +78,21 @@ static char	*choose_path(const char *cmd, char *syspath)
  *
  * @param tokens: The tokens obtained from user input
  * @param sh: The shell
- * @return the exit code from the new process
+ * @return The exit code from the new process
  */
-static int	sub_process(t_command *command)
+static void	sub_process(t_command *cmd)
 {
 	char	*full_name;
 	char	**argv;
-	char	**envp;
 
-	full_name = choose_path(command->cmd, get_env("PATH")->value);
+	full_name = choose_path(cmd->cmd, get_env("PATH")->value);
 	if (!full_name)
 		exit(0);
-	// envp = gen_envp(g_sh->env);
-	// if (!argv || !envp)
-	// 	exit(0);
-	argv = (char **)command->args;
+	argv = gen_argv(cmd, full_name);
+	if (!argv)
+		exit(0);
 	execve(full_name, argv, __environ);
 	safe_free((void **)&argv);
-	safe_free((void **)&envp);
 	exit (1);
 }
 

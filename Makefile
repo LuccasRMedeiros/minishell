@@ -40,7 +40,7 @@ export MINISHELL
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-SANITIZERS = -g3 -fsanitize=address
+SANITIZERS =
 
 LIB_PATH = ./lib
 LIBFT_PATH = $(LIB_PATH)/libft
