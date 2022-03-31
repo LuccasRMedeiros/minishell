@@ -53,6 +53,7 @@ static void	set_default_envs(void)
 	if (g_sh->pwd == NULL)
 		error();
 	g_sh->old_pwd = g_sh->pwd;
+	g_sh->local_vars = NULL;
 }
 
 void	parse_env(void)

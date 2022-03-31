@@ -44,6 +44,7 @@ typedef struct s_shell
 	t_env		*home;
 	t_env		*pwd;
 	t_env		*old_pwd;
+	t_env		*local_vars;
 	char		*error_msg;
 	uint8_t		exit_code;
 }	t_shell;
